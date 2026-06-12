@@ -43,16 +43,16 @@ export default function AdminPesertaPage() {
 
   useEffect(() => {
     async function load() {
-      const { data } = await supabase
-        .from("participants")
-        .select(`
-          id, npm, program_studi, fakultas, no_hp, created_at,
-          profiles(full_name),
-          submissions(judul_karya, sub_tema, status, submitted_at, file_url)
-        `)
-        .order("created_at", { ascending: false });
-      setParticipants((data as unknown as Participant[]) || []);
-      setLoading(false);
+      try {
+        const res = await fetch("/api/admin/peserta");
+        const { data } = await res.json();
+        setParticipants((data as unknown as Participant[]) || []);
+      } catch (err) {
+        console.error(err);
+        setParticipants([]);
+      } finally {
+        setLoading(false);
+      }
     }
     load();
   }, []);

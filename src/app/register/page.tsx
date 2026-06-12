@@ -55,6 +55,8 @@ export default function RegisterPage() {
       if (authError) {
         if (authError.message.includes("already registered")) {
           setError("Email ini sudah terdaftar. Silakan login.");
+        } else if (authError.message.toLowerCase().includes("rate limit")) {
+          setError("Terlalu banyak percobaan pendaftaran. Silakan coba lagi nanti atau nonaktifkan 'Confirm Email' di Supabase.");
         } else {
           setError(authError.message);
         }

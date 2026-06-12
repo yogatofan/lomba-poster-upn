@@ -37,13 +37,16 @@ export default function AdminJuriPage() {
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
 
   async function loadJuri() {
-    const { data } = await supabase
-      .from("profiles")
-      .select("id, full_name, role, created_at")
-      .eq("role", "juri")
-      .order("created_at", { ascending: false });
-    setJuriList((data as Juri[]) || []);
-    setLoading(false);
+    try {
+      const res = await fetch("/api/admin/juri");
+      const { data } = await res.json();
+      setJuriList(data || []);
+    } catch (err) {
+      console.error(err);
+      setJuriList([]);
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => { loadJuri(); }, []);

@@ -18,7 +18,11 @@ export default async function JuriLayout({
     .eq("id", user.id)
     .single();
 
-  if (profile?.role !== "juri" && profile?.role !== "admin") {
+  if (!profile) {
+    redirect("/login");
+  }
+
+  if (profile.role !== "juri" && profile.role !== "admin") {
     redirect("/peserta/dashboard");
   }
 

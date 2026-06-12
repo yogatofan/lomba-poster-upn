@@ -18,8 +18,12 @@ export default async function PesertaLayout({
     .eq("id", user.id)
     .single();
 
-  if (profile?.role !== "peserta") {
-    redirect(`/${profile?.role}/dashboard`);
+  if (!profile) {
+    redirect("/login");
+  }
+
+  if (profile.role !== "peserta") {
+    redirect(`/${profile.role}/dashboard`);
   }
 
   return (

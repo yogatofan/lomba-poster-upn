@@ -30,7 +30,13 @@ export default function LoginPage() {
       });
 
       if (authError) {
-        setError("Email atau password salah. Silakan coba lagi.");
+        if (authError.message.toLowerCase().includes("email not confirmed")) {
+          setError("Email Anda belum dikonfirmasi. Silakan cek kotak masuk email Anda.");
+        } else if (authError.message.toLowerCase().includes("invalid login credentials")) {
+          setError("Email atau password salah. Silakan coba lagi.");
+        } else {
+          setError(authError.message);
+        }
         return;
       }
 

@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { createClient, createServiceClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { StatCard } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Card";
@@ -43,7 +43,8 @@ export default async function AdminDashboard() {
     .select("*", { count: "exact", head: true })
     .eq("status", "submitted");
 
-  const { count: totalJuri } = await supabase
+  const serviceClient = await createServiceClient();
+  const { count: totalJuri } = await serviceClient
     .from("profiles")
     .select("*", { count: "exact", head: true })
     .eq("role", "juri");
@@ -66,8 +67,7 @@ export default async function AdminDashboard() {
 
   const maxTema = Math.max(...Object.values(byTema), 1);
 
-  // Recent participants
-  const { data: recentParticipants } = await supabase
+  const { data: recentParticipants } = await serviceClient
     .from("participants")
     .select("npm, program_studi, profiles(full_name), created_at")
     .order("created_at", { ascending: false })

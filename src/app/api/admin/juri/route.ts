@@ -1,6 +1,30 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient, createServiceClient } from "@/lib/supabase/server";
 
+export async function GET(request: NextRequest) {
+  try {
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return NextResponse.json({ error: "Tidak diizinkan." }, { status: 401 });
+
+    const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).single();
+    if (profile?.role !== "admin") return NextResponse.json({ error: "Akses ditolak." }, { status: 403 });
+
+    const serviceClient = await createServiceClient();
+    const { data, error } = await serviceClient
+      .from("profiles")
+      .select("id, full_name, role, created_at")
+      .eq("role", "juri")
+      .order("created_at", { ascending: false });
+
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ data });
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json({ error: "Terjadi kesalahan server." }, { status: 500 });
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     const supabase = await createClient();
@@ -52,13 +76,14 @@ export async function DELETE(request: NextRequest) {
     const juriId = request.nextUrl.searchParams.get("id");
     if (!juriId) return NextResponse.json({ error: "ID juri diperlukan." }, { status: 400 });
 
+    const serviceClient = await createServiceClient();
+    
     // Verify it's actually a juri
-    const { data: juriProfile } = await supabase.from("profiles").select("role").eq("id", juriId).single();
+    const { data: juriProfile } = await serviceClient.from("profiles").select("role").eq("id", juriId).single();
     if (juriProfile?.role !== "juri") {
       return NextResponse.json({ error: "Pengguna ini bukan juri." }, { status: 400 });
     }
 
-    const serviceClient = await createServiceClient();
     const { error: deleteError } = await serviceClient.auth.admin.deleteUser(juriId);
     if (deleteError) return NextResponse.json({ error: deleteError.message }, { status: 500 });
 

@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { createClient, createServiceClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { Badge } from "@/components/ui/Card";
 import { Trophy, Medal, Star, ImageIcon } from "lucide-react";
@@ -11,8 +11,10 @@ export default async function AdminLeaderboardPage() {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
+  const serviceClient = await createServiceClient();
+
   // Get all submitted submissions with participant info and scores
-  const { data: submissions } = await supabase
+  const { data: submissions } = await serviceClient
     .from("submissions")
     .select(`
       id, judul_karya, sub_tema, file_url,
@@ -69,8 +71,10 @@ export default async function AdminLeaderboardPage() {
       return b.avgTotal - a.avgTotal;
     });
 
-  const totalJuri = await supabase.from("profiles").select("*", { count: "exact", head: true }).eq("role", "juri");
-  const juriCount = totalJuri.count ?? 0;
+  const { count: juriCount } = await serviceClient
+    .from("profiles")
+    .select("*", { count: "exact", head: true })
+    .eq("role", "juri");
 
   const rankIcon = (rank: number) => {
     if (rank === 1) return <Trophy className="w-5 h-5 text-yellow-400" />;

@@ -47,7 +47,33 @@ async function seed() {
   const adminExists = existingUsers?.users?.find((u) => u.email === adminEmail);
 
   if (adminExists) {
-    console.log(`   ⚠️  Admin sudah ada (${adminEmail}), melewati pembuatan akun.\n`);
+    console.log(`   ⚠️  Admin sudah ada (${adminEmail}), melewati pembuatan akun.`);
+    
+    // Pastikan profile admin juga ada di tabel profiles
+    const { data: profile, error: checkError } = await supabase
+      .from("profiles")
+      .select("id")
+      .eq("id", adminExists.id)
+      .maybeSingle();
+
+    if (checkError) {
+      console.error("❌ Gagal memeriksa profile admin:", checkError.message);
+    } else if (!profile) {
+      console.log("   🛠️  Profile admin tidak ditemukan di database. Membuat profile admin...");
+      const { error: profileError } = await supabase.from("profiles").insert({
+        id: adminExists.id,
+        full_name: adminExists.user_metadata?.full_name || "Administrator UPN",
+        role: "admin",
+      });
+
+      if (profileError) {
+        console.error("❌ Gagal membuat profile admin:", profileError.message);
+      } else {
+        console.log("   ✅ Profile admin berhasil disinkronisasi ke tabel profiles.\n");
+      }
+    } else {
+      console.log("   ✅ Profile admin sudah sinkron di tabel profiles.\n");
+    }
   } else {
     const { data: adminUser, error: adminError } = await supabase.auth.admin.createUser({
       email: adminEmail,
