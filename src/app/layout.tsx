@@ -3,11 +3,11 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Lomba Poster — Dies Natalis UPN \"Veteran\" Jawa Timur",
-    template: "%s | Lomba Poster UPN",
+    default: "Lomba Poster — Dies Natalis 67 UPN \"Veteran\" Jawa Timur",
+    template: "%s | Lomba Poster UPN \"Veteran\" Jawa Timur",
   },
   description:
-    "Aplikasi pendaftaran dan penilaian Lomba Poster Pencegahan Kekerasan Seksual — Dies Natalis UPN \"Veteran\" Jawa Timur, target Rekor MURI.",
+    "Aplikasi pendaftaran dan penilaian Lomba Poster Pencegahan Kekerasan Seksual — Dies Natalis 67 UPN \"Veteran\" Jawa Timur, target Rekor MURI.",
   keywords: [
     "lomba poster",
     "UPN Veteran Jawa Timur",

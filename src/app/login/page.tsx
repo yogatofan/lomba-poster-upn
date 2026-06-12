@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/Button";
@@ -77,12 +78,15 @@ export default function LoginPage() {
         <div className="glass rounded-3xl p-8">
           {/* Logo */}
           <div className="flex flex-col items-center mb-8">
-            <div className="w-14 h-14 rounded-2xl gradient-brand flex items-center justify-center text-white font-black text-lg shadow-xl shadow-upn-green-900/50 mb-4">
-              UPN
+            <div className="relative w-14 h-14 mb-4">
+              <Image src="/logo.png" alt="Logo" fill className="object-contain" />
             </div>
-            <h1 className="text-2xl font-black text-white">Masuk ke Akun</h1>
+            <h1 className="text-2xl font-black text-white">Masuk Akun</h1>
+            <p className="text-sm text-white-400/60 mt-1">
+              Lomba Poster
+            </p>
             <p className="text-sm text-green-400/60 mt-1">
-              Lomba Poster Dies Natalis UPN
+              Dies Natalis 67 — UPN "Veteran" Jawa Timur
             </p>
           </div>
 
@@ -98,7 +102,7 @@ export default function LoginPage() {
               id="input-email"
               label="Alamat Email"
               type="email"
-              placeholder="email@upnvjatim.ac.id"
+              placeholder="email@upnjatim.ac.id"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required

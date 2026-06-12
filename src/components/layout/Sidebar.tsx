@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import clsx from "clsx";
 import { createClient } from "@/lib/supabase/client";
@@ -76,13 +77,12 @@ export function Sidebar({ role, userName }: SidebarProps) {
       {/* Logo / Brand */}
       <div className="p-6 border-b border-white/8">
         <div className="flex items-center gap-3">
-          {/* Logo Placeholder */}
-          <div className="w-10 h-10 rounded-xl gradient-brand flex items-center justify-center text-white font-bold text-sm shrink-0 shadow-lg shadow-upn-green-900/50">
-            UPN
+          <div className="relative w-10 h-10 shrink-0">
+            <Image src="/logo.png" alt="Logo" fill className="object-contain" />
           </div>
           <div>
-            <p className="text-xs font-bold text-white leading-tight">Lomba Poster</p>
-            <p className="text-[10px] text-green-400/70 leading-tight">Dies Natalis UPN</p>
+            <p className="text-xs font-bold text-white leading-tight">UPN "Veteran" Jawa Timur</p>
+            <p className="text-[10px] text-green-400/70 leading-tight">Dies Natalis 67</p>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 # Product Requirements Document (PRD)
 ## Aplikasi Pendaftaran & Penilaian Lomba Poster Pencegahan Kekerasan Seksual
-### Dies Natalis UPN "Veteran" Jawa Timur — Rekor MURI
+### Dies Natalis 67 UPN "Veteran" Jawa Timur — Rekor MURI
 
 ---
 

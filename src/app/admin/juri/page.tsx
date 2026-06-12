@@ -13,6 +13,8 @@ import {
   CheckCircle2,
   Eye,
   EyeOff,
+  Play,
+  Ban,
 } from "lucide-react";
 
 interface Juri {
@@ -146,7 +148,7 @@ export default function AdminJuriPage() {
             <Input
               id="input-juri-name"
               label="Nama Lengkap Juri"
-              placeholder="Dr. Ahmad Fauzi, M.Kom"
+              placeholder="Kasmiaji, Ph.D."
               value={form.fullName}
               onChange={(e) => setForm({ ...form, fullName: e.target.value })}
               error={formErrors.fullName}
@@ -155,7 +157,7 @@ export default function AdminJuriPage() {
               id="input-juri-email"
               label="Email"
               type="email"
-              placeholder="juri@upnvjatim.ac.id"
+              placeholder="juri@upnjatim.ac.id"
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
               error={formErrors.email}

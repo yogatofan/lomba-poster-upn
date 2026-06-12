@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import {
   Shield,
@@ -12,9 +13,9 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: 'Lomba Poster — Dies Natalis UPN "Veteran" Jawa Timur',
+  title: 'Lomba Poster — Dies Natalis 67 UPN "Veteran" Jawa Timur',
   description:
-    'Ikuti Lomba Poster Pencegahan Kekerasan Seksual Dies Natalis UPN "Veteran" Jawa Timur. Target Rekor MURI.',
+    'Ikuti Lomba Poster Pencegahan Kekerasan Seksual Dies Natalis 67 UPN "Veteran" Jawa Timur. Target Rekor MURI.',
 };
 
 const subTema = [
@@ -27,7 +28,7 @@ const subTema = [
 
 const stats = [
   { icon: <Users className="w-6 h-6" />, value: "300+", label: "Target Peserta" },
-  { icon: <Trophy className="w-6 h-6" />, value: "1", label: "Rekor MURI" },
+  { icon: <Trophy className="w-6 h-6" />, value: "1", label: "Total Peserta" },
   { icon: <Star className="w-6 h-6" />, value: "5", label: "Sub-Tema" },
   { icon: <Award className="w-6 h-6" />, value: "4", label: "Indikator Penilaian" },
 ];
@@ -53,12 +54,13 @@ export default function HomePage() {
       <nav className="relative z-10 glass border-b border-white/8">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl gradient-brand flex items-center justify-center text-white font-bold text-sm shadow-lg">
-              UPN
+            <div className="relative w-12 h-12">
+              <Image src="/logo.png" alt="Logo" fill className="object-contain" />
             </div>
             <div>
-              <p className="text-sm font-bold text-white">Lomba Poster</p>
-              <p className="text-[10px] text-green-400/70">Dies Natalis UPN "Veteran" Jawa Timur</p>
+              {/* <p className="text-sm font-bold text-white">Lomba Poster</p> */}
+              <p className="text-xl font-bold text-white">UPN "Veteran" Jawa Timur</p>
+              <p className="text-20px] text-green-400/70">Dies Natalis 67</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
@@ -83,7 +85,7 @@ export default function HomePage() {
         <div className="animate-fade-in">
           <div className="inline-flex items-center gap-2 glass px-4 py-2 rounded-full text-xs text-green-400 mb-6 border border-upn-green-700/30">
             <Shield className="w-3.5 h-3.5" />
-            Target Rekor MURI — Dies Natalis UPN
+            Target Rekor MURI — Dies Natalis 67 UPN "Veteran" Jawa Timur
           </div>
 
           <h1 className="text-4xl md:text-6xl font-black text-white leading-tight mb-6">
@@ -105,13 +107,6 @@ export default function HomePage() {
               className="btn-primary px-8 py-3.5 rounded-xl inline-flex items-center gap-2 text-base"
             >
               Daftar Sebagai Peserta
-              <ArrowRight className="w-5 h-5" />
-            </Link>
-            <Link
-              href="/login"
-              className="text-sm text-green-400 hover:text-green-300 flex items-center gap-1 transition-colors"
-            >
-              Sudah punya akun? Masuk →
             </Link>
           </div>
         </div>
@@ -202,7 +197,7 @@ export default function HomePage() {
             <div className="hidden sm:block w-1 h-1 rounded-full bg-green-600" />
             <div className="flex items-center gap-2 text-sm text-green-400">
               <CheckCircle2 className="w-4 h-4" />
-              Gratis untuk mahasiswa UPN
+              Gratis untuk mahasiswa UPNVJT
             </div>
           </div>
           <Link
@@ -211,7 +206,6 @@ export default function HomePage() {
             className="btn-primary mt-8 inline-flex items-center gap-2 px-8 py-3.5 rounded-xl text-base"
           >
             Daftar Sekarang
-            <ArrowRight className="w-5 h-5" />
           </Link>
         </div>
       </section>
@@ -219,7 +213,7 @@ export default function HomePage() {
       {/* Footer */}
       <footer className="relative z-10 border-t border-white/8 py-8 text-center">
         <p className="text-xs text-green-400/40">
-          © 2025 UPN "Veteran" Jawa Timur — Dies Natalis Lomba Poster Pencegahan Kekerasan Seksual
+          © 2025 UPN "Veteran" Jawa Timur &bull; Dies Natalis 67 &bull; Lomba Poster Pencegahan Kekerasan Seksual
         </p>
       </footer>
     </div>

@@ -62,7 +62,7 @@ async function seed() {
       console.log("   🛠️  Profile admin tidak ditemukan di database. Membuat profile admin...");
       const { error: profileError } = await supabase.from("profiles").insert({
         id: adminExists.id,
-        full_name: adminExists.user_metadata?.full_name || "Administrator UPN",
+        full_name: adminExists.user_metadata?.full_name || "Administrator UPNVJT",
         role: "admin",
       });
 
@@ -80,7 +80,7 @@ async function seed() {
       password: adminPassword,
       email_confirm: true,
       user_metadata: {
-        full_name: "Administrator UPN",
+        full_name: "Administrator UPNVJT",
         role: "admin",
       },
     });

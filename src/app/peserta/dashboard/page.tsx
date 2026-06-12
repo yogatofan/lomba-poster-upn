@@ -88,7 +88,7 @@ export default async function PesertaDashboard() {
           Halo, {profile?.full_name?.split(" ")[0]} 👋
         </h1>
         <p className="text-sm text-green-400/60 mt-1">
-          Dashboard Peserta — Lomba Poster Dies Natalis UPN
+          Dashboard Peserta — Lomba Poster Dies Natalis 67 UPN "Veteran" Jawa Timur
         </p>
       </div>
 
