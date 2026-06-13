@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     'Ikuti Lomba Poster Pencegahan Kekerasan Seksual Dies Natalis ke-67 UPN "Veteran" Jawa Timur. Target Rekor MURI.',
 };
 
-import { createClient } from "@/lib/supabase/server";
+import { createClient, createServiceClient } from "@/lib/supabase/server";
 
 const subTema = [
   "Kenali, Cegah, dan Lawan Kekerasan Seksual",
@@ -36,8 +36,8 @@ const indikator = [
 ];
 
 export default async function HomePage() {
-  const supabase = await createClient();
-  const { count } = await supabase
+  const serviceClient = await createServiceClient();
+  const { count } = await serviceClient
     .from("submissions")
     .select("*", { count: "exact", head: true })
     .eq("status", "submitted");
