@@ -14,7 +14,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="flex flex-col gap-1.5">
         {label && (
-          <label htmlFor={id} className="text-sm font-medium text-green-300">
+          <label htmlFor={id} className="text-sm font-semibold text-ink-muted-80">
             {label}
           </label>
         )}
@@ -23,18 +23,18 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           id={id}
           className={clsx(
             "input-field",
-            error && "border-upn-red-600 focus:border-upn-red-500 focus:shadow-[0_0_0_3px_rgba(139,0,0,0.15)]",
+            error && "border-upn-red-600 focus:border-upn-red-500 focus:shadow-[0_0_0_3px_rgba(198,40,40,0.12)]",
             className
           )}
           {...props}
         />
         {error && (
-          <p className="text-xs text-red-400 flex items-center gap-1">
+          <p className="text-xs text-upn-red-700 flex items-center gap-1">
             <span>⚠</span> {error}
           </p>
         )}
         {hint && !error && (
-          <p className="text-xs text-green-400/60">{hint}</p>
+          <p className="text-xs text-ink-muted-48">{hint}</p>
         )}
       </div>
     );
@@ -54,7 +54,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     return (
       <div className="flex flex-col gap-1.5">
         {label && (
-          <label htmlFor={id} className="text-sm font-medium text-green-300">
+          <label htmlFor={id} className="text-sm font-semibold text-ink-muted-80">
             {label}
           </label>
         )}
@@ -69,10 +69,10 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           {...props}
         />
         {error && (
-          <p className="text-xs text-red-400">⚠ {error}</p>
+          <p className="text-xs text-upn-red-700">⚠ {error}</p>
         )}
         {hint && !error && (
-          <p className="text-xs text-green-400/60">{hint}</p>
+          <p className="text-xs text-ink-muted-48">{hint}</p>
         )}
       </div>
     );
@@ -92,7 +92,7 @@ export function Select({ label, error, options, placeholder, className, id, ...p
   return (
     <div className="flex flex-col gap-1.5">
       {label && (
-        <label htmlFor={id} className="text-sm font-medium text-green-300">
+        <label htmlFor={id} className="text-sm font-semibold text-ink-muted-80">
           {label}
         </label>
       )}
@@ -103,7 +103,7 @@ export function Select({ label, error, options, placeholder, className, id, ...p
           error && "border-upn-red-600",
           className
         )}
-        style={{ colorScheme: "dark" }}
+        style={{ colorScheme: "light" }}
         {...props}
       >
         {placeholder && (
@@ -112,12 +112,12 @@ export function Select({ label, error, options, placeholder, className, id, ...p
           </option>
         )}
         {options.map((opt) => (
-          <option key={opt.value} value={opt.value} className="bg-dark-800">
+          <option key={opt.value} value={opt.value}>
             {opt.label}
           </option>
         ))}
       </select>
-      {error && <p className="text-xs text-red-400">⚠ {error}</p>}
+      {error && <p className="text-xs text-upn-red-700">⚠ {error}</p>}
     </div>
   );
 }

@@ -58,42 +58,34 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-dark-900 flex items-center justify-center p-4">
-      {/* Ambient */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -left-40 w-96 h-96 rounded-full bg-upn-green-800/20 blur-3xl" />
-        <div className="absolute -bottom-20 -right-40 w-80 h-80 rounded-full bg-upn-red-800/15 blur-3xl" />
-      </div>
-
-      <div className="relative z-10 w-full max-w-md animate-fade-in-scale">
+    <div className="min-h-screen bg-canvas-parchment flex items-center justify-center p-4">
+      <div className="w-full max-w-md animate-fade-in-scale">
         {/* Back link */}
         <Link
           href="/"
-          className="inline-flex items-center gap-1.5 text-sm text-green-400/70 hover:text-green-400 mb-8 transition-colors"
+          className="inline-flex items-center gap-1.5 text-sm text-ink-muted-48 hover:text-ink mb-8 transition-colors font-medium"
         >
           <ArrowLeft size={15} />
           Kembali ke beranda
         </Link>
 
-        <div className="glass rounded-3xl p-8">
+        <div className="bg-white border border-hairline rounded-3xl p-8 shadow-sm">
           {/* Logo */}
           <div className="flex flex-col items-center mb-8">
             <div className="relative w-14 h-14 mb-4">
               <Image src="/logo.png" alt="Logo" fill className="object-contain" />
             </div>
-            <h1 className="text-2xl font-black text-white">Masuk Akun</h1>
-            <p className="text-sm text-white-400/60 mt-1">
-              Lomba Poster
-            </p>
-            <p className="text-sm text-green-400/60 mt-1">
-              Dies Natalis 67 — UPN "Veteran" Jawa Timur
+            <h1 className="text-2xl font-black text-ink">Masuk Akun</h1>
+            <p className="text-sm text-ink-muted-48 mt-1">Lomba Poster</p>
+            <p className="text-sm text-upn-green-700 font-medium mt-0.5">
+              Dies Natalis ke-67 — UPN "Veteran" Jawa Timur
             </p>
           </div>
 
           {error && (
-            <div className="glass-red rounded-xl p-3 mb-5 flex items-center gap-2">
-              <Shield className="w-4 h-4 text-red-400 shrink-0" />
-              <p className="text-sm text-red-300">{error}</p>
+            <div className="card-alert flex items-center gap-2 mb-5">
+              <Shield className="w-4 h-4 text-upn-red-700 shrink-0" />
+              <p className="text-sm text-upn-red-700">{error}</p>
             </div>
           )}
 
@@ -110,7 +102,7 @@ export default function LoginPage() {
             />
 
             <div className="flex flex-col gap-1.5">
-              <label htmlFor="input-password" className="text-sm font-medium text-green-300">
+              <label htmlFor="input-password" className="text-sm font-semibold text-ink-muted-80">
                 Password
               </label>
               <div className="relative">
@@ -127,7 +119,7 @@ export default function LoginPage() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-green-400/50 hover:text-green-400 transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-ink-muted-48 hover:text-ink transition-colors"
                 >
                   {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
@@ -147,16 +139,16 @@ export default function LoginPage() {
           </form>
 
           <div className="mt-6 text-center">
-            <p className="text-sm text-green-400/50">
+            <p className="text-sm text-ink-muted-48">
               Belum punya akun?{" "}
-              <Link href="/register" className="text-green-400 hover:text-green-300 font-semibold">
+              <Link href="/register" className="text-upn-green-700 hover:text-upn-green-800 font-semibold">
                 Daftar sebagai peserta
               </Link>
             </p>
           </div>
         </div>
 
-        <p className="text-center text-xs text-green-400/30 mt-6">
+        <p className="text-center text-xs text-ink-muted-48 mt-6">
           Akun juri & admin dibuat oleh panitia.
           <br />
           Hubungi panitia jika mengalami kendala.

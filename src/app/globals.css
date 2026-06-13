@@ -1,45 +1,59 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @import "tailwindcss";
 
 /* ============================================================
    DESIGN TOKENS — Lomba Poster UPN "Veteran" Jawa Timur
    ============================================================ */
 @theme {
-  /* UPN Brand Colors */
+  /* === DESIGN.MD CANONICAL TOKENS === */
+
+  /* Canvas / Surface */
+  --color-canvas: #ffffff;
+  --color-canvas-parchment: #f5f5f7;
+  --color-surface-pearl: #fafafc;
+
+  /* Text / Ink */
+  --color-ink: #1d1d1f;
+  --color-ink-muted-80: #333333;
+  --color-ink-muted-48: #6e6e73;
+
+  /* Borders */
+  --color-hairline: #e0e0e0;
+  --color-divider-soft: #f0f0f0;
+
+  /* Action Blue (interactive) */
+  --color-primary: #0066cc;
+  --color-primary-focus: #0071e3;
+  --color-primary-on-dark: #2997ff;
+
+  /* UPN Brand Colors (retained for status/badges/CTAs) */
   --color-upn-green-900: #0d2b0f;
   --color-upn-green-800: #1b5e20;
   --color-upn-green-700: #2e7d32;
   --color-upn-green-600: #388e3c;
   --color-upn-green-500: #43a047;
   --color-upn-green-400: #66bb6a;
-  --color-upn-green-300: #a5d6a7;
+  --color-upn-green-100: #e8f5e9;
+  --color-upn-green-50:  #f1f8f1;
+
   --color-upn-red-900: #4a0000;
   --color-upn-red-800: #8b0000;
   --color-upn-red-700: #c62828;
   --color-upn-red-600: #d32f2f;
-  --color-upn-red-500: #e53935;
-  --color-upn-red-400: #ef5350;
-
-  /* Dark Background Scale */
-  --color-dark-950: #030704;
-  --color-dark-900: #0a0f0a;
-  --color-dark-800: #111811;
-  --color-dark-700: #1a241a;
-  --color-dark-600: #243024;
-  --color-dark-500: #2e3e2e;
-
-  /* Glass effect */
-  --color-glass-white: rgba(255, 255, 255, 0.05);
-  --color-glass-green: rgba(46, 125, 50, 0.1);
-  --color-glass-border: rgba(255, 255, 255, 0.08);
+  --color-upn-red-100: #fdecea;
 
   /* Typography */
-  --font-sans: "Inter", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
 
-  /* Spacing & Sizing */
-  --radius-xl: 1rem;
-  --radius-2xl: 1.5rem;
-  --radius-3xl: 2rem;
+  /* Radius scale (DESIGN.MD) */
+  --radius-xs:   5px;
+  --radius-sm:   8px;
+  --radius-md:   11px;
+  --radius-lg:   18px;
+  --radius-pill: 9999px;
+  --radius-xl:   1rem;
+  --radius-2xl:  1.5rem;
+  --radius-3xl:  2rem;
 }
 
 /* ============================================================
@@ -54,11 +68,14 @@ html {
 }
 
 body {
-  font-family: "Inter", system-ui, sans-serif;
-  background-color: #0a0f0a;
-  color: #e8f5e9;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  background-color: #ffffff;
+  color: #1d1d1f;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 17px;
+  line-height: 1.47;
+  letter-spacing: -0.374px;
 }
 
 /* ============================================================
@@ -69,60 +86,97 @@ body {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #111811;
+  background: #f5f5f7;
 }
 ::-webkit-scrollbar-thumb {
-  background: #2e7d32;
+  background: #d0d0d5;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #388e3c;
+  background: #2e7d32;
 }
 
 /* ============================================================
-   GLASSMORPHISM UTILITIES
+   SURFACE / CARD UTILITIES
    ============================================================ */
+
+/* Primary card — white with hairline border */
+.card {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 18px;
+  padding: 1.5rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  border-color: #b8ddb8;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* Parchment card — off-white surface */
+.card-parchment {
+  background: #f5f5f7;
+  border: 1px solid #e0e0e0;
+  border-radius: 18px;
+  padding: 1.5rem;
+}
+
+/* Info/notice card — light green tint */
+.card-info {
+  background: #f1f8f1;
+  border: 1px solid #c5e1c5;
+  border-radius: 14px;
+  padding: 1rem;
+}
+
+/* Alert card — light red tint */
+.card-alert {
+  background: #fdecea;
+  border: 1px solid #f5c0bb;
+  border-radius: 14px;
+  padding: 1rem;
+}
+
+/* Legacy glass shim — now renders as clean card on white bg */
 .glass {
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 18px;
 }
 
 .glass-green {
-  background: rgba(46, 125, 50, 0.08);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(46, 125, 50, 0.2);
+  background: #f1f8f1;
+  border: 1px solid #c5e1c5;
+  border-radius: 14px;
 }
 
 .glass-red {
-  background: rgba(139, 0, 0, 0.08);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(139, 0, 0, 0.2);
+  background: #fdecea;
+  border: 1px solid #f5c0bb;
+  border-radius: 14px;
 }
 
 /* ============================================================
-   GRADIENT UTILITIES
+   GRADIENT UTILITIES (UPN Brand — green→red)
    ============================================================ */
 .gradient-brand {
-  background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 50%, #8b0000 100%);
+  background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 60%, #8b0000 100%);
 }
 
 .gradient-brand-text {
-  background: linear-gradient(135deg, #66bb6a, #43a047, #ef5350);
+  background: linear-gradient(135deg, #2e7d32, #43a047);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-green {
-  background: linear-gradient(135deg, #1b5e20, #43a047);
+  background: linear-gradient(135deg, #2e7d32, #43a047);
 }
 
 .gradient-dark {
-  background: linear-gradient(180deg, #0a0f0a 0%, #111811 100%);
+  background: linear-gradient(180deg, #1d1d1f 0%, #2e3e2e 100%);
 }
 
 /* ============================================================
@@ -130,56 +184,42 @@ body {
    ============================================================ */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeInScale {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
+  from { opacity: 0; transform: scale(0.97); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
 @keyframes pulse-green {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.4); }
-  50% { box-shadow: 0 0 0 8px rgba(46, 125, 50, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.3); }
+  50%       { box-shadow: 0 0 0 8px rgba(46, 125, 50, 0); }
 }
 
 @keyframes shimmer {
-  0% { background-position: -200% 0; }
+  0%   { background-position: -200% 0; }
   100% { background-position: 200% 0; }
 }
 
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
+  50%       { transform: translateY(-6px); }
 }
 
 @keyframes spin-slow {
   from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  to   { transform: rotate(360deg); }
 }
 
 /* ============================================================
    ANIMATION CLASSES
    ============================================================ */
-.animate-fade-in {
-  animation: fadeIn 0.4s ease-out forwards;
-}
-
-.animate-fade-in-scale {
-  animation: fadeInScale 0.3s ease-out forwards;
-}
-
-.animate-pulse-green {
-  animation: pulse-green 2s infinite;
-}
-
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
-.animate-spin-slow {
-  animation: spin-slow 8s linear infinite;
-}
+.animate-fade-in       { animation: fadeIn 0.4s ease-out forwards; }
+.animate-fade-in-scale { animation: fadeInScale 0.3s ease-out forwards; }
+.animate-pulse-green   { animation: pulse-green 2s infinite; }
+.animate-float         { animation: float 3s ease-in-out infinite; }
+.animate-spin-slow     { animation: spin-slow 8s linear infinite; }
 
 /* Stagger delays */
 .delay-100 { animation-delay: 100ms; }
@@ -189,87 +229,91 @@ body {
 .delay-500 { animation-delay: 500ms; }
 
 /* ============================================================
-   COMPONENT BASE STYLES
+   BUTTON COMPONENTS
    ============================================================ */
+
+/* Primary — UPN Green, white text, visible hover */
 .btn-primary {
-  background: linear-gradient(135deg, #2e7d32, #388e3c);
-  color: white;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #2e7d32;
+  color: #ffffff !important;
   border: none;
   padding: 0.625rem 1.5rem;
-  border-radius: 0.75rem;
+  border-radius: 9999px;    /* pill — matches DESIGN.MD primary grammar */
   font-weight: 600;
-  font-size: 0.875rem;
+  font-size: 0.9375rem;     /* ~15px — close to DESIGN.MD 17px body */
+  line-height: 1.4;
   cursor: pointer;
-  transition: all 0.2s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-primary::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #388e3c, #43a047);
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.btn-primary:hover::before {
-  opacity: 1;
+  transition: background-color 0.18s ease, box-shadow 0.18s ease, transform 0.1s ease;
+  text-decoration: none;
 }
 
 .btn-primary:hover {
+  background-color: #1b5e20;
+  color: #ffffff !important;
+  box-shadow: 0 4px 16px rgba(46, 125, 50, 0.3);
   transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(46, 125, 50, 0.35);
 }
 
 .btn-primary:active {
-  transform: translateY(0);
+  background-color: #1b5e20;
+  transform: scale(0.97);
+  box-shadow: none;
 }
 
+/* Secondary / Danger */
 .btn-danger {
-  background: linear-gradient(135deg, #8b0000, #c62828);
-  color: white;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #c62828;
+  color: #ffffff !important;
+  border: none;
+  padding: 0.625rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: background-color 0.18s ease, box-shadow 0.18s ease, transform 0.1s ease;
 }
 
 .btn-danger:hover {
-  box-shadow: 0 8px 24px rgba(139, 0, 0, 0.35);
+  background-color: #8b0000;
+  color: #ffffff !important;
+  box-shadow: 0 4px 16px rgba(139, 0, 0, 0.28);
+  transform: translateY(-1px);
 }
 
+.btn-danger:active {
+  transform: scale(0.97);
+}
+
+/* ============================================================
+   INPUT / FORM FIELDS
+   ============================================================ */
 .input-field {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #e8f5e9;
-  border-radius: 0.75rem;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  color: #1d1d1f;
+  border-radius: 11px;
   padding: 0.625rem 1rem;
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   width: 100%;
   outline: none;
-  transition: all 0.2s ease;
-  font-family: "Inter", sans-serif;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  font-family: "Inter", system-ui, sans-serif;
 }
 
 .input-field::placeholder {
-  color: rgba(232, 245, 233, 0.35);
+  color: #9a9a9a;
 }
 
 .input-field:focus {
   border-color: #2e7d32;
-  background: rgba(46, 125, 50, 0.06);
-  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.15);
-}
-
-.card {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 1rem;
-  padding: 1.5rem;
-  transition: all 0.2s ease;
-}
-
-.card:hover {
-  border-color: rgba(46, 125, 50, 0.3);
-  background: rgba(46, 125, 50, 0.04);
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.12);
 }
 
 /* ============================================================
@@ -278,10 +322,27 @@ body {
 .shimmer {
   background: linear-gradient(
     90deg,
-    rgba(255,255,255,0.03) 25%,
-    rgba(255,255,255,0.08) 50%,
-    rgba(255,255,255,0.03) 75%
+    #f5f5f7 25%,
+    #eaeaec 50%,
+    #f5f5f7 75%
   );
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
+}
+
+/* ============================================================
+   PROGRESS BAR TRACK (light bg)
+   ============================================================ */
+.progress-track {
+  height: 6px;
+  background: #e0e0e0;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #2e7d32, #43a047);
+  border-radius: 9999px;
+  transition: width 0.6s ease;
 }

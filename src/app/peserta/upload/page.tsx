@@ -159,32 +159,32 @@ export default function UploadPage() {
 
   if (!pendaftaranDibuka) {
     return (
-      <div className="glass rounded-2xl p-8 text-center">
-        <AlertCircle className="w-12 h-12 text-red-400 mx-auto mb-3" />
-        <h2 className="text-xl font-bold text-white mb-2">Pendaftaran Ditutup</h2>
-        <p className="text-sm text-green-400/60">Upload poster tidak dapat dilakukan.</p>
+      <div className="card p-8 text-center max-w-md mx-auto mt-12">
+        <AlertCircle className="w-12 h-12 text-upn-red-700 mx-auto mb-3" />
+        <h2 className="text-xl font-bold text-ink mb-2">Pendaftaran Ditutup</h2>
+        <p className="text-sm text-ink-muted-48">Upload poster tidak dapat dilakukan saat ini.</p>
       </div>
     );
   }
 
   if (success) {
     return (
-      <div className="glass-green rounded-2xl p-8 text-center animate-fade-in-scale">
-        <CheckCircle2 className="w-14 h-14 text-green-400 mx-auto mb-3" />
-        <h2 className="text-xl font-bold text-white mb-2">Poster Berhasil Diupload!</h2>
-        <p className="text-sm text-green-400/60">Karya Anda telah terkirim. Mengarahkan ke dashboard...</p>
+      <div className="glass-green rounded-2xl p-8 text-center animate-fade-in-scale max-w-md mx-auto mt-12 border border-upn-green-600/20">
+        <CheckCircle2 className="w-14 h-14 text-upn-green-700 mx-auto mb-3" />
+        <h2 className="text-xl font-bold text-ink mb-2">Poster Berhasil Diupload!</h2>
+        <p className="text-sm text-ink-muted-48">Karya Anda telah terkirim. Mengarahkan ke dashboard...</p>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6 animate-fade-in">
+    <div className="space-y-6 animate-fade-in max-w-3xl">
       <div>
-        <h1 className="text-2xl font-black text-white flex items-center gap-2">
-          <Upload className="w-6 h-6 text-green-400" />
+        <h1 className="text-2xl font-black text-ink flex items-center gap-2">
+          <Upload className="w-6 h-6 text-upn-green-700" />
           {submission?.file_url ? "Reupload Poster" : "Upload Poster"}
         </h1>
-        <p className="text-sm text-green-400/60 mt-1">
+        <p className="text-sm text-ink-muted-48 mt-1">
           {submission?.file_url
             ? "Upload file baru untuk menggantikan poster sebelumnya"
             : "Upload karya poster Anda dalam format JPG atau PNG"}
@@ -193,39 +193,39 @@ export default function UploadPage() {
 
       {/* Info karya */}
       {submission && (
-        <div className="glass rounded-2xl p-4 flex items-start gap-3">
-          <ImageIcon className="w-4 h-4 text-green-400 shrink-0 mt-0.5" />
+        <div className="card p-4 flex items-start gap-3">
+          <ImageIcon className="w-4 h-4 text-upn-green-700 shrink-0 mt-0.5" />
           <div>
-            <p className="text-sm font-semibold text-white">{submission.judul_karya}</p>
-            <p className="text-xs text-green-400/60 mt-0.5">{submission.sub_tema}</p>
+            <p className="text-sm font-semibold text-ink leading-snug">{submission.judul_karya}</p>
+            <p className="text-xs text-ink-muted-48 mt-0.5">{submission.sub_tema}</p>
           </div>
         </div>
       )}
 
       {error && (
-        <div className="glass-red rounded-xl p-4 flex items-start gap-2">
-          <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
-          <p className="text-sm text-red-300">{error}</p>
+        <div className="glass-red rounded-xl p-4 flex items-start gap-2 border border-upn-red-700/20">
+          <AlertCircle className="w-4 h-4 text-upn-red-700 shrink-0 mt-0.5" />
+          <p className="text-sm text-upn-red-800 font-medium">{error}</p>
         </div>
       )}
 
-      <div className="glass rounded-2xl p-6 space-y-4">
+      <div className="card space-y-4">
         {/* Poster lama */}
         {submission?.file_url && !preview && (
           <div>
-            <p className="text-sm font-medium text-green-300 mb-2 flex items-center gap-2">
-              <RefreshCw size={14} />
+            <p className="text-sm font-medium text-ink-muted-80 mb-2 flex items-center gap-2">
+              <RefreshCw size={14} className="text-upn-green-700" />
               Poster Saat Ini
             </p>
-            <div className="relative rounded-xl overflow-hidden bg-dark-700 aspect-video max-w-sm">
+            <div className="relative rounded-xl overflow-hidden bg-canvas-parchment aspect-video max-w-sm border border-hairline">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={submission.file_url}
                 alt="Poster saat ini"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
             </div>
-            <p className="text-xs text-green-400/50 mt-2">
+            <p className="text-xs text-ink-muted-48 mt-2">
               File baru akan menggantikan poster di atas secara permanen.
             </p>
           </div>
@@ -238,10 +238,10 @@ export default function UploadPage() {
             onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
             onDragLeave={() => setDragging(false)}
             onDrop={handleDrop}
-            className={`relative border-2 border-dashed rounded-2xl p-10 text-center transition-all duration-200 ${
+            className={`relative border-2 border-dashed rounded-2xl p-10 text-center transition-all duration-200 cursor-pointer ${
               dragging
-                ? "border-upn-green-500 bg-upn-green-800/15"
-                : "border-white/15 hover:border-upn-green-600/50 hover:bg-upn-green-900/5"
+                ? "border-upn-green-600 bg-upn-green-50/50"
+                : "border-hairline bg-canvas-parchment hover:border-upn-green-600 hover:bg-upn-green-50/20"
             }`}
           >
             <input
@@ -251,43 +251,43 @@ export default function UploadPage() {
               onChange={handleInputChange}
               className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
             />
-            <Upload className={`w-10 h-10 mx-auto mb-3 transition-colors ${dragging ? "text-green-400" : "text-green-600/50"}`} />
-            <p className="text-sm font-semibold text-green-200">
+            <Upload className={`w-10 h-10 mx-auto mb-3 transition-colors ${dragging ? "text-upn-green-700" : "text-ink-muted-48/50"}`} />
+            <p className="text-sm font-semibold text-ink">
               {dragging ? "Lepaskan file di sini" : "Klik atau seret file ke sini"}
             </p>
-            <p className="text-xs text-green-400/50 mt-1">JPG, JPEG, PNG — Maks. 2MB</p>
+            <p className="text-xs text-ink-muted-48 mt-1">JPG, JPEG, PNG — Maks. 2MB</p>
           </div>
         ) : (
           <div className="space-y-3">
-            <div className="relative rounded-xl overflow-hidden bg-dark-700 aspect-video">
+            <div className="relative rounded-xl overflow-hidden bg-canvas-parchment aspect-video border border-hairline max-w-sm">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={preview} alt="Preview poster" className="w-full h-full object-cover" />
+              <img src={preview} alt="Preview poster" className="w-full h-full object-contain" />
               <button
                 onClick={clearFile}
-                className="absolute top-2 right-2 glass p-1.5 rounded-lg text-white hover:bg-white/20 transition-colors"
+                className="absolute top-2 right-2 card bg-white p-1 hover:bg-canvas-parchment transition-colors rounded-lg text-ink flex items-center justify-center cursor-pointer"
               >
                 <X size={14} />
               </button>
             </div>
-            <div className="flex items-center gap-2 text-xs text-green-400">
+            <div className="flex items-center gap-2 text-xs text-upn-green-700 font-semibold">
               <CheckCircle2 size={14} />
               <span>{selectedFile?.name}</span>
-              <span className="text-green-400/40">·</span>
+              <span className="text-ink-muted-48/40">·</span>
               <span>{selectedFile ? (selectedFile.size / 1024 / 1024).toFixed(2) + " MB" : ""}</span>
             </div>
           </div>
         )}
 
         {fileError && (
-          <div className="flex items-center gap-2 text-sm text-red-400">
+          <div className="flex items-center gap-2 text-sm text-upn-red-700">
             <FileWarning size={14} />
             {fileError}
           </div>
         )}
 
         {/* Aturan */}
-        <div className="glass-green rounded-xl p-3 text-xs text-green-300/70 space-y-1">
-          <p className="font-semibold text-green-300">Ketentuan File:</p>
+        <div className="card bg-upn-green-50/50 border border-upn-green-100 p-3 text-xs text-ink-muted-80 space-y-1">
+          <p className="font-bold text-upn-green-800">Ketentuan File:</p>
           <p>• Format: JPG, JPEG, atau PNG saja (bukan PDF)</p>
           <p>• Ukuran maksimal: 2MB per file</p>
           <p>• Resolusi disarankan: minimal 1080×1080px atau A3 (portrait/landscape)</p>

@@ -197,11 +197,11 @@ export default function NilaiPage({ params }: { params: Promise<{ id: string }> 
 
   if (!penilaianDibuka) {
     return (
-      <div className="glass rounded-2xl p-8 text-center">
-        <AlertCircle className="w-12 h-12 text-red-400 mx-auto mb-3" />
-        <h2 className="text-xl font-bold text-white mb-2">Periode Penilaian Ditutup</h2>
-        <p className="text-sm text-green-400/60">Penilaian tidak dapat dilakukan saat ini.</p>
-        <Link href="/juri/dashboard" className="btn-primary mt-4 inline-flex text-sm px-4 py-2 rounded-xl">
+      <div className="card p-8 text-center max-w-md mx-auto mt-12">
+        <AlertCircle className="w-12 h-12 text-upn-red-700 mx-auto mb-3" />
+        <h2 className="text-xl font-bold text-ink mb-2">Periode Penilaian Ditutup</h2>
+        <p className="text-sm text-ink-muted-48">Penilaian tidak dapat dilakukan saat ini.</p>
+        <Link href="/juri/dashboard" className="btn-primary mt-6 inline-flex text-sm">
           Kembali
         </Link>
       </div>
@@ -210,11 +210,11 @@ export default function NilaiPage({ params }: { params: Promise<{ id: string }> 
 
   if (success) {
     return (
-      <div className="glass-green rounded-2xl p-8 text-center animate-fade-in-scale">
-        <CheckCircle2 className="w-14 h-14 text-green-400 mx-auto mb-3" />
-        <h2 className="text-xl font-bold text-white mb-2">Nilai Tersimpan!</h2>
-        <p className="text-sm text-green-400/60">Total Skor: <span className="text-2xl font-black text-green-300">{totalSkor.toFixed(2)}</span></p>
-        <p className="text-xs text-green-400/40 mt-2">Kembali ke dashboard...</p>
+      <div className="glass-green rounded-2xl p-8 text-center animate-fade-in-scale max-w-md mx-auto mt-12 border border-upn-green-600/20">
+        <CheckCircle2 className="w-14 h-14 text-upn-green-700 mx-auto mb-3" />
+        <h2 className="text-xl font-bold text-ink mb-2">Nilai Tersimpan!</h2>
+        <p className="text-sm text-ink-muted-48">Total Skor: <span className="text-2xl font-black text-upn-green-700">{totalSkor.toFixed(2)}</span></p>
+        <p className="text-xs text-ink-muted-48/70 mt-2 animate-pulse">Kembali ke dashboard...</p>
       </div>
     );
   }
@@ -223,63 +223,63 @@ export default function NilaiPage({ params }: { params: Promise<{ id: string }> 
     <div className="space-y-6 animate-fade-in">
       {/* Header */}
       <div className="flex items-center gap-3">
-        <Link href="/juri/dashboard" className="glass p-2 rounded-xl hover:bg-white/8 transition-colors">
-          <ArrowLeft size={18} className="text-green-400" />
+        <Link href="/juri/dashboard" className="card p-2 hover:bg-canvas-parchment transition-colors flex items-center justify-center cursor-pointer">
+          <ArrowLeft size={18} className="text-upn-green-700" />
         </Link>
         <div>
-          <h1 className="text-xl font-black text-white">Form Penilaian</h1>
-          <p className="text-sm text-green-400/60">Karya #{String(submission?.index).padStart(3, "0")}</p>
+          <h1 className="text-xl font-black text-ink">Form Penilaian</h1>
+          <p className="text-sm text-ink-muted-48">Karya #{String(submission?.index).padStart(3, "0")}</p>
         </div>
         {isEdit && (
-          <span className="ml-auto glass px-3 py-1 rounded-full text-xs text-yellow-400 border border-yellow-700/30">
+          <span className="ml-auto bg-yellow-50 text-yellow-700 border border-yellow-200 px-3 py-1 rounded-full text-xs font-semibold">
             Mode Edit
           </span>
         )}
       </div>
 
       {error && (
-        <div className="glass-red rounded-xl p-3 flex items-start gap-2">
-          <AlertCircle size={14} className="text-red-400 shrink-0 mt-0.5" />
-          <p className="text-sm text-red-300">{error}</p>
+        <div className="glass-red rounded-xl p-3 flex items-start gap-2 border border-upn-red-700/20">
+          <AlertCircle size={14} className="text-upn-red-700 shrink-0 mt-0.5" />
+          <p className="text-sm text-upn-red-800 font-medium">{error}</p>
         </div>
       )}
 
       <div className="grid lg:grid-cols-2 gap-6">
         {/* Poster Preview */}
         <div className="space-y-4">
-          <div className="glass rounded-2xl p-5">
+          <div className="card p-5">
             <div className="flex items-center justify-between mb-3">
-              <p className="text-sm font-bold text-white">Preview Poster</p>
+              <p className="text-sm font-bold text-ink">Preview Poster</p>
               {submission?.file_url && (
                 <a href={submission.file_url} target="_blank" rel="noopener noreferrer"
-                  className="text-xs text-green-400 hover:text-green-300 flex items-center gap-1">
+                  className="text-xs text-upn-green-700 hover:text-upn-green-800 flex items-center gap-1 font-semibold">
                   <ExternalLink size={12} /> Buka
                 </a>
               )}
             </div>
             {submission?.file_url ? (
-              <div className="rounded-xl overflow-hidden bg-dark-700 aspect-[3/4]">
+              <div className="rounded-xl overflow-hidden bg-canvas-parchment aspect-[3/4] border border-hairline">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={submission.file_url} alt="Poster" className="w-full h-full object-cover" />
+                <img src={submission.file_url} alt="Poster" className="w-full h-full object-contain" />
               </div>
             ) : (
-              <div className="rounded-xl bg-dark-700 aspect-[3/4] flex items-center justify-center">
-                <p className="text-xs text-green-400/40">Poster belum diupload</p>
+              <div className="rounded-xl bg-canvas-parchment aspect-[3/4] flex items-center justify-center border border-hairline">
+                <p className="text-xs text-ink-muted-48/70">Poster belum diupload</p>
               </div>
             )}
           </div>
 
           {/* Submission info */}
-          <div className="glass rounded-2xl p-4 space-y-2">
+          <div className="card p-4 space-y-2.5">
             <div>
-              <p className="text-xs text-green-400/50">Judul Karya</p>
-              <p className="text-sm font-semibold text-white">{submission?.judul_karya}</p>
+              <p className="text-xs text-ink-muted-48">Judul Karya</p>
+              <p className="text-sm font-semibold text-ink leading-snug">{submission?.judul_karya}</p>
             </div>
             <div>
-              <p className="text-xs text-green-400/50">Sub-Tema</p>
-              <p className="text-xs text-green-200 leading-relaxed">{submission?.sub_tema}</p>
+              <p className="text-xs text-ink-muted-48">Sub-Tema</p>
+              <p className="text-xs text-ink-muted-80 font-medium leading-relaxed">{submission?.sub_tema}</p>
             </div>
-            <p className="text-xs text-green-400/30 pt-1 border-t border-white/5">
+            <p className="text-xs text-ink-muted-48/70 pt-2 border-t border-hairline">
               Identitas peserta disembunyikan untuk menjaga objektivitas penilaian.
             </p>
           </div>
@@ -290,17 +290,17 @@ export default function NilaiPage({ params }: { params: Promise<{ id: string }> 
           {INDIKATOR.map((ind) => {
             const val = scores[ind.key];
             return (
-              <div key={ind.key} className="glass rounded-2xl p-5">
+              <div key={ind.key} className="card p-5">
                 <div className="flex items-start justify-between mb-1">
                   <div>
-                    <p className="text-sm font-bold text-white">{ind.label}</p>
-                    <p className="text-xs text-green-400/50 mt-0.5">{ind.desc}</p>
+                    <p className="text-sm font-bold text-ink">{ind.label}</p>
+                    <p className="text-xs text-ink-muted-48 mt-0.5">{ind.desc}</p>
                   </div>
                   <div className="flex items-baseline gap-1 ml-3">
                     <span className={`text-2xl font-black bg-gradient-to-r ${ind.color} bg-clip-text text-transparent`}>
                       {val || "—"}
                     </span>
-                    <span className="text-xs text-green-400/40">/100</span>
+                    <span className="text-xs text-ink-muted-48/60">/100</span>
                   </div>
                 </div>
 
@@ -311,17 +311,17 @@ export default function NilaiPage({ params }: { params: Promise<{ id: string }> 
                     max={100}
                     value={val || 1}
                     onChange={(e) => setScores({ ...scores, [ind.key]: Number(e.target.value) })}
-                    className="w-full h-2 rounded-full appearance-none bg-white/10 cursor-pointer accent-green-500"
+                    className="w-full h-2 rounded-full appearance-none bg-zinc-200 cursor-pointer accent-upn-green-700"
                   />
                   <div className="flex items-center gap-2">
-                    <span className="text-xs text-green-400/40">1</span>
-                    <div className="flex-1 h-1.5 rounded-full bg-white/5 overflow-hidden">
+                    <span className="text-xs text-ink-muted-48/50">1</span>
+                    <div className="flex-1 h-1.5 rounded-full bg-canvas-parchment overflow-hidden">
                       <div
                         className={`h-full rounded-full bg-gradient-to-r ${ind.color} transition-all`}
                         style={{ width: `${val}%` }}
                       />
                     </div>
-                    <span className="text-xs text-green-400/40">100</span>
+                    <span className="text-xs text-ink-muted-48/50">100</span>
                     <input
                       type="number"
                       min={1}
@@ -337,10 +337,10 @@ export default function NilaiPage({ params }: { params: Promise<{ id: string }> 
                   </div>
                 </div>
 
-                <div className="mt-2 flex items-center justify-between">
-                  <p className="text-xs text-green-400/40">Bobot: {Math.round(ind.bobot * 100)}%</p>
-                  <p className="text-xs text-green-400/60">
-                    Kontribusi: <span className="font-semibold text-green-400">{(val * ind.bobot).toFixed(1)}</span>
+                <div className="mt-2 flex items-center justify-between text-xs">
+                  <p className="text-ink-muted-48">Bobot: {Math.round(ind.bobot * 100)}%</p>
+                  <p className="text-ink-muted-48">
+                    Kontribusi: <span className="font-semibold text-upn-green-700">{(val * ind.bobot).toFixed(1)}</span>
                   </p>
                 </div>
               </div>
@@ -348,8 +348,8 @@ export default function NilaiPage({ params }: { params: Promise<{ id: string }> 
           })}
 
           {/* Catatan */}
-          <div className="glass rounded-2xl p-5">
-            <label htmlFor="catatan" className="text-sm font-bold text-white block mb-2">
+          <div className="card p-5">
+            <label htmlFor="catatan" className="text-sm font-bold text-ink block mb-2">
               Catatan (Opsional)
             </label>
             <textarea
@@ -363,24 +363,24 @@ export default function NilaiPage({ params }: { params: Promise<{ id: string }> 
           </div>
 
           {/* Total Preview */}
-          <div className="glass-green rounded-2xl p-5">
+          <div className="card bg-upn-green-50/50 border border-upn-green-100 p-5">
             <div className="flex items-center gap-2 mb-3">
-              <Calculator size={16} className="text-green-400" />
-              <p className="text-sm font-bold text-white">Preview Total Skor</p>
+              <Calculator size={16} className="text-upn-green-700" />
+              <p className="text-sm font-bold text-ink">Preview Total Skor</p>
             </div>
-            <div className="space-y-1.5 text-xs text-green-300/70 mb-3">
+            <div className="space-y-1.5 text-xs text-ink-muted-80 mb-3">
               {INDIKATOR.map((ind) => (
                 <div key={ind.key} className="flex justify-between">
                   <span>{ind.label} ({Math.round(ind.bobot * 100)}%)</span>
-                  <span className="font-semibold text-green-300">
+                  <span className="font-semibold text-upn-green-800">
                     {(scores[ind.key] * ind.bobot).toFixed(2)}
                   </span>
                 </div>
               ))}
             </div>
-            <div className="border-t border-white/10 pt-3 flex items-center justify-between">
-              <p className="text-sm font-bold text-white">Total Skor</p>
-              <p className="text-3xl font-black text-green-400">{totalSkor.toFixed(2)}</p>
+            <div className="border-t border-hairline pt-3 flex items-center justify-between">
+              <p className="text-sm font-bold text-ink">Total Skor</p>
+              <p className="text-3xl font-black text-upn-green-700">{totalSkor.toFixed(2)}</p>
             </div>
           </div>
 

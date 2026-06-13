@@ -13,8 +13,6 @@ import {
   CheckCircle2,
   Eye,
   EyeOff,
-  Play,
-  Ban,
 } from "lucide-react";
 
 interface Juri {
@@ -109,11 +107,11 @@ export default function AdminJuriPage() {
     <div className="space-y-6 animate-fade-in">
       <div className="flex items-start justify-between">
         <div>
-          <h1 className="text-2xl font-black text-white flex items-center gap-2">
-            <Gavel className="w-6 h-6 text-green-400" />
+          <h1 className="text-2xl font-black text-ink flex items-center gap-2">
+            <Gavel className="w-6 h-6 text-upn-green-700" />
             Kelola Juri
           </h1>
-          <p className="text-sm text-green-400/60 mt-1">
+          <p className="text-sm text-ink-muted-48 mt-1">
             {juriList.length} juri terdaftar — Akun dibuat manual oleh admin
           </p>
         </div>
@@ -128,22 +126,22 @@ export default function AdminJuriPage() {
       </div>
 
       {error && (
-        <div className="glass-red rounded-xl p-3 flex items-start gap-2">
-          <AlertCircle size={14} className="text-red-400 shrink-0 mt-0.5" />
-          <p className="text-sm text-red-300">{error}</p>
+        <div className="glass-red rounded-xl p-3 flex items-start gap-2 border border-upn-red-700/20">
+          <AlertCircle size={14} className="text-upn-red-700 shrink-0 mt-0.5" />
+          <p className="text-sm text-upn-red-800 font-medium">{error}</p>
         </div>
       )}
       {success && (
-        <div className="glass-green rounded-xl p-3 flex items-start gap-2">
-          <CheckCircle2 size={14} className="text-green-400 shrink-0 mt-0.5" />
-          <p className="text-sm text-green-300">{success}</p>
+        <div className="glass-green rounded-xl p-3 flex items-start gap-2 border border-upn-green-600/20">
+          <CheckCircle2 size={14} className="text-upn-green-700 shrink-0 mt-0.5" />
+          <p className="text-sm text-upn-green-800 font-medium">{success}</p>
         </div>
       )}
 
       {/* Add Form */}
       {showForm && (
-        <div className="glass rounded-2xl p-6 animate-fade-in-scale">
-          <h2 className="text-base font-bold text-white mb-4">Tambah Akun Juri Baru</h2>
+        <div className="card animate-fade-in-scale">
+          <h2 className="text-base font-bold text-ink mb-4">Tambah Akun Juri Baru</h2>
           <form onSubmit={handleAddJuri} className="space-y-4">
             <Input
               id="input-juri-name"
@@ -163,7 +161,7 @@ export default function AdminJuriPage() {
               error={formErrors.email}
             />
             <div className="flex flex-col gap-1.5">
-              <label htmlFor="input-juri-pass" className="text-sm font-medium text-green-300">
+              <label htmlFor="input-juri-pass" className="text-sm font-medium text-ink-muted-80">
                 Password Sementara
               </label>
               <div className="relative">
@@ -176,12 +174,12 @@ export default function AdminJuriPage() {
                   className="input-field pr-10"
                 />
                 <button type="button" onClick={() => setShowPass(!showPass)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-green-400/50 hover:text-green-400">
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-ink-muted-48 hover:text-ink cursor-pointer">
                   {showPass ? <EyeOff size={15} /> : <Eye size={15} />}
                 </button>
               </div>
-              {formErrors.password && <p className="text-xs text-red-400">⚠ {formErrors.password}</p>}
-              <p className="text-xs text-green-400/50">Sampaikan password ini kepada juri untuk login pertama kali.</p>
+              {formErrors.password && <p className="text-xs text-upn-red-700">⚠ {formErrors.password}</p>}
+              <p className="text-xs text-ink-muted-48">Sampaikan password ini kepada juri untuk login pertama kali.</p>
             </div>
             <div className="flex gap-3 pt-1">
               <Button id="btn-submit-juri" type="submit" loading={saving}>
@@ -196,9 +194,9 @@ export default function AdminJuriPage() {
       )}
 
       {/* Juri List */}
-      <div className="glass rounded-2xl overflow-hidden">
-        <div className="p-5 border-b border-white/8">
-          <h2 className="text-base font-bold text-white">Daftar Juri</h2>
+      <div className="card p-0 overflow-hidden">
+        <div className="p-5 border-b border-hairline bg-canvas-parchment">
+          <h2 className="text-base font-bold text-ink">Daftar Juri</h2>
         </div>
         {loading ? (
           <div className="p-8 space-y-3">
@@ -208,22 +206,22 @@ export default function AdminJuriPage() {
           </div>
         ) : juriList.length === 0 ? (
           <div className="p-12 text-center">
-            <Gavel className="w-10 h-10 text-green-600/30 mx-auto mb-3" />
-            <p className="text-sm text-green-400/50">Belum ada juri terdaftar</p>
-            <p className="text-xs text-green-400/30 mt-1">Klik "Tambah Juri" untuk membuat akun juri baru</p>
+            <Gavel className="w-10 h-10 text-ink-muted-48/30 mx-auto mb-3" />
+            <p className="text-sm text-ink-muted-48">Belum ada juri terdaftar</p>
+            <p className="text-xs text-ink-muted-48/70 mt-1">Klik "Tambah Juri" untuk membuat akun juri baru</p>
           </div>
         ) : (
-          <div className="divide-y divide-white/5">
+          <div className="divide-y divide-hairline">
             {juriList.map((juri, i) => (
-              <div key={juri.id} className="flex items-center gap-4 px-5 py-4">
+              <div key={juri.id} className="flex items-center gap-4 px-5 py-4 hover:bg-canvas-parchment transition-colors">
                 <div className="w-10 h-10 rounded-full gradient-brand flex items-center justify-center text-white text-sm font-bold shrink-0">
                   {juri.full_name.charAt(0).toUpperCase()}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold text-white">{juri.full_name}</p>
+                  <p className="text-sm font-semibold text-ink">{juri.full_name}</p>
                   <div className="flex items-center gap-2 mt-1">
                     <Badge variant="blue" size="sm">Juri #{i + 1}</Badge>
-                    <span className="text-xs text-green-400/40">
+                    <span className="text-xs text-ink-muted-48">
                       Dibuat {new Date(juri.created_at).toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" })}
                     </span>
                   </div>

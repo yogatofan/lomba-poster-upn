@@ -14,7 +14,7 @@ import {
 import type { Metadata } from "next";
 import Link from "next/link";
 
-export const metadata: Metadata = { title: "Dashboard Admin" };
+export const metadata: Metadata = { title: "Dashboard" };
 
 const SUB_TEMA_SHORT: Record<string, string> = {
   "Kenali, Cegah, dan Lawan Kekerasan Seksual": "Kenali & Lawan KS",
@@ -77,8 +77,8 @@ export default async function AdminDashboard() {
     <div className="space-y-6 animate-fade-in">
       <div className="flex items-start justify-between">
         <div>
-          <h1 className="text-2xl font-black text-white">Dashboard Admin</h1>
-          <p className="text-sm text-green-400/60 mt-1">Monitor lomba poster secara real-time</p>
+          <h1 className="text-2xl font-black text-ink">Dashboard</h1>
+          <p className="text-sm text-ink-muted-48 mt-1">Monitor lomba poster secara real-time</p>
         </div>
         <div className="flex items-center gap-2">
           {settings?.pendaftaran_dibuka ? (
@@ -132,24 +132,24 @@ export default async function AdminDashboard() {
 
       <div className="grid lg:grid-cols-2 gap-6">
         {/* Distribusi Sub-Tema */}
-        <div className="glass rounded-2xl p-6">
-          <h2 className="text-base font-bold text-white mb-5 flex items-center gap-2">
-            <BarChart3 size={16} className="text-green-400" />
+        <div className="bg-white border border-hairline rounded-[18px] p-6">
+          <h2 className="text-base font-bold text-ink mb-5 flex items-center gap-2">
+            <BarChart3 size={16} className="text-upn-green-700" />
             Karya per Sub-Tema
           </h2>
           {Object.keys(byTema).length === 0 ? (
-            <p className="text-sm text-green-400/40 text-center py-6">Belum ada karya masuk</p>
+            <p className="text-sm text-ink-muted-48 text-center py-6">Belum ada karya masuk</p>
           ) : (
             <div className="space-y-3">
               {Object.entries(byTema)
                 .sort(([, a], [, b]) => b - a)
                 .map(([tema, count]) => (
                   <div key={tema}>
-                    <div className="flex justify-between mb-1">
-                      <span className="text-xs text-green-300/70">{tema}</span>
-                      <span className="text-xs font-bold text-green-400">{count}</span>
+                    <div className="flex justify-between mb-1.5">
+                      <span className="text-xs text-ink-muted-80 font-medium">{tema}</span>
+                      <span className="text-xs font-bold text-upn-green-700">{count}</span>
                     </div>
-                    <div className="h-2 bg-white/5 rounded-full overflow-hidden">
+                    <div className="h-2 bg-canvas-parchment rounded-full overflow-hidden">
                       <div
                         className="h-full gradient-green rounded-full transition-all duration-700"
                         style={{ width: `${(count / maxTema) * 100}%` }}
@@ -162,32 +162,32 @@ export default async function AdminDashboard() {
         </div>
 
         {/* Recent Registrations */}
-        <div className="glass rounded-2xl p-6">
+        <div className="bg-white border border-hairline rounded-[18px] p-6">
           <div className="flex items-center justify-between mb-5">
-            <h2 className="text-base font-bold text-white flex items-center gap-2">
-              <Users size={16} className="text-green-400" />
+            <h2 className="text-base font-bold text-ink flex items-center gap-2">
+              <Users size={16} className="text-upn-green-700" />
               Pendaftar Terbaru
             </h2>
-            <Link href="/admin/peserta" className="text-xs text-green-400 hover:text-green-300 transition-colors">
+            <Link href="/admin/peserta" className="text-xs text-upn-green-700 hover:text-upn-green-800 font-medium transition-colors">
               Lihat semua →
             </Link>
           </div>
           {!recentParticipants?.length ? (
-            <p className="text-sm text-green-400/40 text-center py-6">Belum ada pendaftar</p>
+            <p className="text-sm text-ink-muted-48 text-center py-6">Belum ada pendaftar</p>
           ) : (
-            <div className="space-y-3">
+            <div className="space-y-2">
               {recentParticipants.map((p, i) => {
                 const prof = p.profiles as unknown as { full_name: string } | null;
                 return (
-                  <div key={i} className="flex items-center gap-3 p-3 rounded-xl bg-white/3">
+                  <div key={i} className="flex items-center gap-3 p-3 rounded-xl bg-canvas-parchment hover:bg-upn-green-50 transition-colors">
                     <div className="w-8 h-8 rounded-full gradient-brand flex items-center justify-center text-white text-xs font-bold shrink-0">
                       {prof?.full_name?.charAt(0).toUpperCase() || "?"}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-semibold text-white truncate">{prof?.full_name || "—"}</p>
-                      <p className="text-xs text-green-400/50 truncate">{p.program_studi} · {p.npm}</p>
+                      <p className="text-sm font-semibold text-ink truncate">{prof?.full_name || "—"}</p>
+                      <p className="text-xs text-ink-muted-48 truncate">{p.program_studi} · {p.npm}</p>
                     </div>
-                    <p className="text-xs text-green-400/40 shrink-0">
+                    <p className="text-xs text-ink-muted-48 shrink-0">
                       {new Date(p.created_at).toLocaleDateString("id-ID", { day: "numeric", month: "short" })}
                     </p>
                   </div>
@@ -199,22 +199,22 @@ export default async function AdminDashboard() {
       </div>
 
       {/* Quick Actions */}
-      <div className="glass rounded-2xl p-5">
-        <h2 className="text-sm font-bold text-green-300/60 uppercase tracking-wider mb-4">Aksi Cepat</h2>
+      <div className="bg-white border border-hairline rounded-[18px] p-5">
+        <h2 className="text-xs font-bold text-ink-muted-48 uppercase tracking-wider mb-4">Aksi Cepat</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {[
-            { href: "/admin/peserta", label: "Export Peserta", icon: <Users size={16} />, color: "green" },
-            { href: "/admin/juri", label: "Kelola Juri", icon: <Star size={16} />, color: "blue" },
-            { href: "/admin/leaderboard", label: "Leaderboard", icon: <BarChart3 size={16} />, color: "yellow" },
-            { href: "/admin/settings", label: "Pengaturan", icon: <ToggleRight size={16} />, color: "red" },
+            { href: "/admin/peserta", label: "Export Peserta", icon: <Users size={16} /> },
+            { href: "/admin/juri", label: "Kelola Juri", icon: <Star size={16} /> },
+            { href: "/admin/leaderboard", label: "Leaderboard", icon: <BarChart3 size={16} /> },
+            { href: "/admin/settings", label: "Pengaturan", icon: <ToggleRight size={16} /> },
           ].map((action) => (
             <Link
               key={action.href}
               href={action.href}
-              className="glass rounded-xl p-4 flex flex-col items-center gap-2 text-center hover:border-upn-green-600/40 transition-all group"
+              className="bg-canvas-parchment border border-hairline rounded-xl p-4 flex flex-col items-center gap-2 text-center hover:border-upn-green-400/60 hover:bg-upn-green-50 transition-all group"
             >
-              <span className="text-green-400 group-hover:text-green-300 transition-colors">{action.icon}</span>
-              <span className="text-xs font-semibold text-green-300/70 group-hover:text-green-200">{action.label}</span>
+              <span className="text-upn-green-700 group-hover:text-upn-green-800 transition-colors">{action.icon}</span>
+              <span className="text-xs font-semibold text-ink-muted-80">{action.label}</span>
             </Link>
           ))}
         </div>

@@ -22,23 +22,23 @@ export function Button({
   ...props
 }: ButtonProps) {
   const base =
-    "inline-flex items-center justify-center gap-2 font-semibold rounded-xl transition-all duration-200 relative overflow-hidden cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed";
+    "inline-flex items-center justify-center gap-2 font-semibold rounded-full transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed select-none";
 
   const variants = {
     primary:
-      "bg-gradient-to-br from-upn-green-700 to-upn-green-600 text-white hover:-translate-y-0.5 hover:shadow-lg hover:shadow-upn-green-800/40 active:translate-y-0",
+      "bg-upn-green-700 text-white hover:bg-upn-green-800 hover:shadow-lg hover:shadow-upn-green-700/25 active:scale-[0.97] active:shadow-none",
     danger:
-      "bg-gradient-to-br from-upn-red-800 to-upn-red-700 text-white hover:-translate-y-0.5 hover:shadow-lg hover:shadow-upn-red-800/40 active:translate-y-0",
+      "bg-upn-red-700 text-white hover:bg-upn-red-800 hover:shadow-lg hover:shadow-upn-red-800/25 active:scale-[0.97]",
     ghost:
-      "bg-transparent text-green-300 hover:bg-upn-green-800/20 hover:text-green-200",
+      "bg-transparent text-ink hover:bg-canvas-parchment active:bg-hairline",
     outline:
-      "bg-transparent border border-white/10 text-green-200 hover:border-upn-green-600/50 hover:bg-upn-green-800/10",
+      "bg-transparent border border-hairline text-ink hover:border-upn-green-600 hover:bg-upn-green-50 active:scale-[0.97]",
   };
 
   const sizes = {
-    sm: "px-3 py-1.5 text-xs",
-    md: "px-5 py-2.5 text-sm",
-    lg: "px-7 py-3.5 text-base",
+    sm: "px-4 py-1.5 text-sm",
+    md: "px-5 py-2.5 text-[0.9375rem]",
+    lg: "px-7 py-3 text-base",
   };
 
   return (

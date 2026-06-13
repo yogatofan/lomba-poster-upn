@@ -85,10 +85,10 @@ export default function AdminPesertaPage() {
   }
 
   function SortIcon({ field }: { field: typeof sortField }) {
-    if (sortField !== field) return <ChevronUp size={12} className="text-green-600/30" />;
+    if (sortField !== field) return <ChevronUp size={12} className="text-zinc-300" />;
     return sortDir === "asc"
-      ? <ChevronUp size={12} className="text-green-400" />
-      : <ChevronDown size={12} className="text-green-400" />;
+      ? <ChevronUp size={12} className="text-upn-green-700" />
+      : <ChevronDown size={12} className="text-upn-green-700" />;
   }
 
   function exportCSV() {
@@ -122,11 +122,11 @@ export default function AdminPesertaPage() {
     <div className="space-y-6 animate-fade-in">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-black text-white flex items-center gap-2">
-            <Users className="w-6 h-6 text-green-400" />
+          <h1 className="text-2xl font-black text-ink flex items-center gap-2">
+            <Users className="w-6 h-6 text-upn-green-700" />
             Data Peserta
           </h1>
-          <p className="text-sm text-green-400/60 mt-1">
+          <p className="text-sm text-ink-muted-48 mt-1">
             {participants.length} peserta terdaftar · {filtered.length} ditampilkan
           </p>
         </div>
@@ -142,9 +142,9 @@ export default function AdminPesertaPage() {
       </div>
 
       {/* Filters */}
-      <div className="glass rounded-2xl p-4 flex flex-wrap gap-3">
-        <div className="relative flex-1 min-w-48">
-          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-green-400/40" />
+      <div className="card p-4 flex flex-wrap gap-3">
+        <div className="relative flex-1 min-w-[200px]">
+          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-muted-48/50" />
           <input
             id="search-peserta"
             type="text"
@@ -158,50 +158,48 @@ export default function AdminPesertaPage() {
           id="filter-fakultas"
           value={filterFakultas}
           onChange={(e) => setFilterFakultas(e.target.value)}
-          className="input-field py-2 text-sm w-auto"
-          style={{ colorScheme: "dark" }}
+          className="input-field py-2 text-sm w-auto cursor-pointer"
         >
           <option value="">Semua Fakultas</option>
-          {uniqueFakultas.map((f) => <option key={f} value={f} className="bg-dark-800">{f}</option>)}
+          {uniqueFakultas.map((f) => <option key={f} value={f}>{f}</option>)}
         </select>
         <select
           id="filter-status"
           value={filterStatus}
           onChange={(e) => setFilterStatus(e.target.value)}
-          className="input-field py-2 text-sm w-auto"
-          style={{ colorScheme: "dark" }}
+          className="input-field py-2 text-sm w-auto cursor-pointer"
         >
           <option value="">Semua Status</option>
-          <option value="submitted" className="bg-dark-800">Terkirim</option>
-          <option value="draft" className="bg-dark-800">Draft</option>
-          <option value="no_poster" className="bg-dark-800">Belum Upload</option>
+          <option value="submitted">Terkirim</option>
+          <option value="draft">Draft</option>
+          <option value="no_poster">Belum Upload</option>
         </select>
       </div>
 
       {/* Table */}
-      <div className="glass rounded-2xl overflow-hidden">
+      <div className="card p-0 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-white/8">
-                <th className="text-left px-4 py-3 text-xs font-semibold text-green-400/60 uppercase tracking-wider">No</th>
+              <tr className="border-b border-hairline bg-canvas-parchment">
+                <th className="text-left px-4 py-3 text-xs font-semibold text-ink-muted-80 uppercase tracking-wider">No</th>
                 <th
-                  className="text-left px-4 py-3 text-xs font-semibold text-green-400/60 uppercase tracking-wider cursor-pointer hover:text-green-400 transition-colors"
+                  className="text-left px-4 py-3 text-xs font-semibold text-ink-muted-80 uppercase tracking-wider cursor-pointer hover:text-upn-green-700 transition-colors"
                   onClick={() => handleSort("npm")}
                 >
                   <div className="flex items-center gap-1">NPM <SortIcon field="npm" /></div>
                 </th>
-                <th className="text-left px-4 py-3 text-xs font-semibold text-green-400/60 uppercase tracking-wider">Nama</th>
+                <th className="text-left px-4 py-3 text-xs font-semibold text-ink-muted-80 uppercase tracking-wider">Nama</th>
                 <th
-                  className="text-left px-4 py-3 text-xs font-semibold text-green-400/60 uppercase tracking-wider cursor-pointer hover:text-green-400 transition-colors"
+                  className="text-left px-4 py-3 text-xs font-semibold text-ink-muted-80 uppercase tracking-wider cursor-pointer hover:text-upn-green-700 transition-colors"
                   onClick={() => handleSort("fakultas")}
                 >
                   <div className="flex items-center gap-1">Fakultas <SortIcon field="fakultas" /></div>
                 </th>
-                <th className="text-left px-4 py-3 text-xs font-semibold text-green-400/60 uppercase tracking-wider">Sub-Tema</th>
-                <th className="text-left px-4 py-3 text-xs font-semibold text-green-400/60 uppercase tracking-wider">Status</th>
+                <th className="text-left px-4 py-3 text-xs font-semibold text-ink-muted-80 uppercase tracking-wider">Sub-Tema</th>
+                <th className="text-left px-4 py-3 text-xs font-semibold text-ink-muted-80 uppercase tracking-wider">Status</th>
                 <th
-                  className="text-left px-4 py-3 text-xs font-semibold text-green-400/60 uppercase tracking-wider cursor-pointer hover:text-green-400 transition-colors"
+                  className="text-left px-4 py-3 text-xs font-semibold text-ink-muted-80 uppercase tracking-wider cursor-pointer hover:text-upn-green-700 transition-colors"
                   onClick={() => handleSort("created_at")}
                 >
                   <div className="flex items-center gap-1">Waktu Daftar <SortIcon field="created_at" /></div>
@@ -211,7 +209,7 @@ export default function AdminPesertaPage() {
             <tbody>
               {loading ? (
                 [...Array(5)].map((_, i) => (
-                  <tr key={i} className="border-b border-white/5">
+                  <tr key={i} className="border-b border-divider-soft">
                     {[...Array(7)].map((_, j) => (
                       <td key={j} className="px-4 py-3">
                         <div className="shimmer h-4 rounded w-full" />
@@ -221,7 +219,7 @@ export default function AdminPesertaPage() {
                 ))
               ) : filtered.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="text-center py-12 text-sm text-green-400/40">
+                  <td colSpan={7} className="text-center py-12 text-sm text-ink-muted-48">
                     Tidak ada peserta yang sesuai filter
                   </td>
                 </tr>
@@ -229,15 +227,15 @@ export default function AdminPesertaPage() {
                 filtered.map((p, i) => {
                   const sub = Array.isArray(p.submissions) ? p.submissions[0] : p.submissions;
                   return (
-                    <tr key={p.id} className="border-b border-white/5 hover:bg-white/2 transition-colors">
-                      <td className="px-4 py-3 text-green-400/50 text-xs">{i + 1}</td>
-                      <td className="px-4 py-3 font-mono text-xs text-green-300">{p.npm}</td>
+                    <tr key={p.id} className="border-b border-divider-soft hover:bg-canvas-parchment transition-colors">
+                      <td className="px-4 py-3 text-ink-muted-48 text-xs">{i + 1}</td>
+                      <td className="px-4 py-3 font-mono text-xs text-ink">{p.npm}</td>
                       <td className="px-4 py-3">
-                        <p className="font-semibold text-white">{p.profiles?.full_name || "—"}</p>
-                        <p className="text-xs text-green-400/50">{p.program_studi}</p>
+                        <p className="font-semibold text-ink">{p.profiles?.full_name || "—"}</p>
+                        <p className="text-xs text-ink-muted-48">{p.program_studi}</p>
                       </td>
-                      <td className="px-4 py-3 text-xs text-green-300/70">{p.fakultas}</td>
-                      <td className="px-4 py-3 text-xs text-green-300/70 max-w-[160px]">
+                      <td className="px-4 py-3 text-xs text-ink-muted-80">{p.fakultas}</td>
+                      <td className="px-4 py-3 text-xs text-ink-muted-80 max-w-[160px]">
                         <p className="truncate">{sub?.sub_tema || "—"}</p>
                       </td>
                       <td className="px-4 py-3">
@@ -249,7 +247,7 @@ export default function AdminPesertaPage() {
                           <Badge variant="gray">Belum Upload</Badge>
                         )}
                       </td>
-                      <td className="px-4 py-3 text-xs text-green-400/50">
+                      <td className="px-4 py-3 text-xs text-ink-muted-48">
                         {new Date(p.created_at).toLocaleDateString("id-ID", {
                           day: "numeric", month: "short", year: "numeric",
                         })}

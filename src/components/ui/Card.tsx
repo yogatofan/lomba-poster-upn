@@ -9,11 +9,11 @@ interface BadgeProps {
 
 export function Badge({ children, variant = "green", size = "sm", className }: BadgeProps) {
   const variants = {
-    green: "bg-upn-green-800/30 text-green-400 border border-upn-green-700/30",
-    red: "bg-upn-red-800/30 text-red-400 border border-upn-red-700/30",
-    yellow: "bg-yellow-900/30 text-yellow-400 border border-yellow-700/30",
-    gray: "bg-white/5 text-gray-400 border border-white/10",
-    blue: "bg-blue-900/30 text-blue-400 border border-blue-700/30",
+    green:  "bg-upn-green-100 text-upn-green-800 border border-upn-green-400/40",
+    red:    "bg-upn-red-100 text-upn-red-700 border border-upn-red-600/30",
+    yellow: "bg-yellow-50 text-yellow-800 border border-yellow-300",
+    gray:   "bg-canvas-parchment text-ink-muted-48 border border-hairline",
+    blue:   "bg-blue-50 text-blue-700 border border-blue-200",
   };
 
   const sizes = {
@@ -24,7 +24,7 @@ export function Badge({ children, variant = "green", size = "sm", className }: B
   return (
     <span
       className={clsx(
-        "inline-flex items-center gap-1 font-medium rounded-full",
+        "inline-flex items-center gap-1 font-semibold rounded-full",
         variants[variant],
         sizes[size],
         className
@@ -45,40 +45,32 @@ interface StatCardProps {
 }
 
 export function StatCard({ label, value, icon, trend, className, color = "green" }: StatCardProps) {
-  const colors = {
-    green: "from-upn-green-800/20 to-upn-green-900/20 border-upn-green-700/20",
-    red: "from-upn-red-800/20 to-upn-red-900/20 border-upn-red-700/20",
-    blue: "from-blue-800/20 to-blue-900/20 border-blue-700/20",
-    yellow: "from-yellow-800/20 to-yellow-900/20 border-yellow-700/20",
-  };
-
   const iconColors = {
-    green: "text-green-400",
-    red: "text-red-400",
-    blue: "text-blue-400",
-    yellow: "text-yellow-400",
+    green:  "text-upn-green-700 bg-upn-green-100",
+    red:    "text-upn-red-700 bg-upn-red-100",
+    blue:   "text-blue-700 bg-blue-50",
+    yellow: "text-yellow-700 bg-yellow-50",
   };
 
   return (
     <div
       className={clsx(
-        "glass rounded-2xl p-5 bg-gradient-to-br animate-fade-in",
-        colors[color],
+        "bg-white border border-hairline rounded-[18px] p-5 animate-fade-in",
         className
       )}
     >
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-sm text-green-300/60 font-medium">{label}</p>
-          <p className="text-3xl font-bold text-white mt-1">{value}</p>
+          <p className="text-sm text-ink-muted-48 font-medium">{label}</p>
+          <p className="text-3xl font-bold text-ink mt-1">{value}</p>
           {trend && (
-            <p className="text-xs text-green-400 mt-1">
+            <p className="text-xs text-upn-green-700 mt-1 font-medium">
               +{trend.value} {trend.label}
             </p>
           )}
         </div>
         {icon && (
-          <div className={clsx("p-3 rounded-xl bg-white/5", iconColors[color])}>
+          <div className={clsx("p-2.5 rounded-xl", iconColors[color])}>
             {icon}
           </div>
         )}
@@ -104,9 +96,9 @@ export function Card({ children, className, hover = false, padding = "md" }: Car
   return (
     <div
       className={clsx(
-        "glass rounded-2xl",
+        "bg-white border border-hairline rounded-[18px]",
         paddings[padding],
-        hover && "hover:border-upn-green-700/30 hover:bg-upn-green-900/5 transition-all duration-200 cursor-pointer",
+        hover && "hover:border-upn-green-400/60 hover:shadow-sm transition-all duration-200 cursor-pointer",
         className
       )}
     >
@@ -117,6 +109,6 @@ export function Card({ children, className, hover = false, padding = "md" }: Car
 
 export function Divider({ className }: { className?: string }) {
   return (
-    <hr className={clsx("border-0 border-t border-white/8", className)} />
+    <hr className={clsx("border-0 border-t border-hairline", className)} />
   );
 }

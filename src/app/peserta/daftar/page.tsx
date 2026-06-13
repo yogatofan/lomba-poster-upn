@@ -6,7 +6,6 @@ import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/Button";
 import { Input, Select } from "@/components/ui/Input";
 import { CheckCircle2, FileText, AlertCircle } from "lucide-react";
-import type { Metadata } from "next";
 
 const SUB_TEMA = [
   "Kenali, Cegah, dan Lawan Kekerasan Seksual",
@@ -185,10 +184,10 @@ export default function DaftarPage() {
 
   if (!pendaftaranDibuka) {
     return (
-      <div className="glass rounded-2xl p-8 text-center">
-        <AlertCircle className="w-12 h-12 text-red-400 mx-auto mb-3" />
-        <h2 className="text-xl font-bold text-white mb-2">Pendaftaran Ditutup</h2>
-        <p className="text-sm text-green-400/60">
+      <div className="card p-8 text-center max-w-md mx-auto mt-12">
+        <AlertCircle className="w-12 h-12 text-upn-red-700 mx-auto mb-3" />
+        <h2 className="text-xl font-bold text-ink mb-2">Pendaftaran Ditutup</h2>
+        <p className="text-sm text-ink-muted-48">
           Periode pendaftaran telah berakhir. Formulir tidak dapat diakses.
         </p>
       </div>
@@ -197,37 +196,37 @@ export default function DaftarPage() {
 
   if (success) {
     return (
-      <div className="glass-green rounded-2xl p-8 text-center animate-fade-in-scale">
-        <CheckCircle2 className="w-14 h-14 text-green-400 mx-auto mb-3" />
-        <h2 className="text-xl font-bold text-white mb-2">Data Tersimpan!</h2>
-        <p className="text-sm text-green-400/60">Mengarahkan ke halaman upload poster...</p>
+      <div className="glass-green rounded-2xl p-8 text-center animate-fade-in-scale max-w-md mx-auto mt-12 border border-upn-green-600/20">
+        <CheckCircle2 className="w-14 h-14 text-upn-green-700 mx-auto mb-3" />
+        <h2 className="text-xl font-bold text-ink mb-2">Data Tersimpan!</h2>
+        <p className="text-sm text-ink-muted-48">Mengarahkan ke halaman upload poster...</p>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6 animate-fade-in">
+    <div className="space-y-6 animate-fade-in max-w-3xl">
       <div>
-        <h1 className="text-2xl font-black text-white flex items-center gap-2">
-          <FileText className="w-6 h-6 text-green-400" />
+        <h1 className="text-2xl font-black text-ink flex items-center gap-2">
+          <FileText className="w-6 h-6 text-upn-green-700" />
           {isEdit ? "Edit" : "Formulir"} Pendaftaran
         </h1>
-        <p className="text-sm text-green-400/60 mt-1">
+        <p className="text-sm text-ink-muted-48 mt-1">
           {isEdit ? "Perbarui data diri dan pilihan sub-tema" : "Isi data diri dan pilih sub-tema lomba"}
         </p>
       </div>
 
       {error && (
-        <div className="glass-red rounded-xl p-4 flex items-start gap-2">
-          <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
-          <p className="text-sm text-red-300">{error}</p>
+        <div className="glass-red rounded-xl p-4 flex items-start gap-2 border border-upn-red-700/20">
+          <AlertCircle className="w-4 h-4 text-upn-red-700 shrink-0 mt-0.5" />
+          <p className="text-sm text-upn-red-800 font-medium">{error}</p>
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-5">
         {/* Data Diri */}
-        <div className="glass rounded-2xl p-6 space-y-4">
-          <h2 className="text-base font-bold text-white border-b border-white/8 pb-3">Data Diri</h2>
+        <div className="card space-y-4">
+          <h2 className="text-base font-bold text-ink border-b border-hairline pb-3">Data Diri</h2>
 
           <Input
             id="input-npm"
@@ -272,8 +271,8 @@ export default function DaftarPage() {
         </div>
 
         {/* Karya */}
-        <div className="glass rounded-2xl p-6 space-y-4">
-          <h2 className="text-base font-bold text-white border-b border-white/8 pb-3">Data Karya</h2>
+        <div className="card space-y-4">
+          <h2 className="text-base font-bold text-ink border-b border-hairline pb-3">Data Karya</h2>
 
           <Input
             id="input-judul"
@@ -287,7 +286,7 @@ export default function DaftarPage() {
 
           {/* Sub-tema cards */}
           <div className="flex flex-col gap-1.5">
-            <label className="text-sm font-medium text-green-300">Sub-Tema</label>
+            <label className="text-sm font-medium text-ink-muted-80">Sub-Tema</label>
             <div className="space-y-2">
               {SUB_TEMA.map((tema, i) => (
                 <label
@@ -295,8 +294,8 @@ export default function DaftarPage() {
                   htmlFor={`subtema-${i}`}
                   className={`flex items-start gap-3 p-4 rounded-xl border cursor-pointer transition-all ${
                     form.sub_tema === tema
-                      ? "bg-upn-green-800/20 border-upn-green-600/50 text-green-200"
-                      : "border-white/8 bg-white/3 hover:bg-white/5 text-green-300/60 hover:text-green-200"
+                      ? "bg-upn-green-50 border-upn-green-600 text-ink shadow-sm"
+                      : "border-hairline bg-white hover:bg-canvas-parchment text-ink-muted-48 hover:text-ink"
                   }`}
                 >
                   <input
@@ -306,24 +305,24 @@ export default function DaftarPage() {
                     value={tema}
                     checked={form.sub_tema === tema}
                     onChange={() => setForm({ ...form, sub_tema: tema })}
-                    className="mt-0.5 accent-green-500"
+                    className="mt-0.5 accent-upn-green-700 cursor-pointer"
                   />
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-wide text-green-500/60 mb-0.5">
+                    <p className={`text-xs font-semibold uppercase tracking-wide mb-0.5 ${form.sub_tema === tema ? "text-upn-green-700" : "text-ink-muted-48"}`}>
                       Sub-Tema {i + 1}
                     </p>
-                    <p className="text-sm font-medium">{tema}</p>
+                    <p className="text-sm font-semibold">{tema}</p>
                   </div>
                 </label>
               ))}
             </div>
-            {errors.sub_tema && <p className="text-xs text-red-400">⚠ {errors.sub_tema}</p>}
+            {errors.sub_tema && <p className="text-xs text-upn-red-700">⚠ {errors.sub_tema}</p>}
           </div>
         </div>
 
         {/* Disclaimer */}
-        <div className="glass-green rounded-xl p-4">
-          <p className="text-xs text-green-300/70 leading-relaxed">
+        <div className="card bg-upn-green-50/50 border border-upn-green-100 p-4">
+          <p className="text-xs text-ink-muted-80 leading-relaxed">
             <strong>Pernyataan Peserta:</strong> Dengan mendaftar, saya menyatakan bahwa karya yang
             dikirimkan merupakan karya orisinal milik saya, tidak melanggar hak cipta pihak lain,
             bersifat edukatif, dan tidak mengandung konten grafis/eksploitatif. Data yang saya isi

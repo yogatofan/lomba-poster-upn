@@ -59,12 +59,12 @@ export function Sidebar({ role, userName }: SidebarProps) {
   const roleLabel =
     role === "peserta" ? "Peserta" : role === "juri" ? "Juri" : "Admin";
 
-  const roleColor =
+  const roleBadge =
     role === "admin"
-      ? "bg-upn-red-800/30 text-red-400 border-upn-red-700/30"
+      ? "bg-upn-red-100 text-upn-red-700 border border-upn-red-600/30"
       : role === "juri"
-      ? "bg-blue-800/30 text-blue-400 border-blue-700/30"
-      : "bg-upn-green-800/30 text-green-400 border-upn-green-700/30";
+        ? "bg-blue-50 text-blue-700 border border-blue-200"
+        : "bg-upn-green-100 text-upn-green-800 border border-upn-green-400/40";
 
   async function handleLogout() {
     await supabase.auth.signOut();
@@ -73,30 +73,30 @@ export function Sidebar({ role, userName }: SidebarProps) {
   }
 
   return (
-    <aside className="w-64 min-h-screen glass border-r border-white/8 flex flex-col shrink-0">
+    <aside className="w-64 min-h-screen bg-canvas-parchment border-r border-hairline flex flex-col shrink-0">
       {/* Logo / Brand */}
-      <div className="p-6 border-b border-white/8">
+      <div className="p-6 border-b border-hairline">
         <div className="flex items-center gap-3">
           <div className="relative w-10 h-10 shrink-0">
             <Image src="/logo.png" alt="Logo" fill className="object-contain" />
           </div>
           <div>
-            <p className="text-xs font-bold text-white leading-tight">UPN "Veteran" Jawa Timur</p>
-            <p className="text-[10px] text-green-400/70 leading-tight">Dies Natalis 67</p>
+            <p className="text-xs font-bold text-ink leading-tight">UPN "Veteran" Jawa Timur</p>
+            <p className="text-[10px] text-upn-green-700 leading-tight font-medium">Dies Natalis ke-67</p>
           </div>
         </div>
       </div>
 
       {/* User Info */}
-      <div className="p-4 border-b border-white/8">
-        <div className="glass-green rounded-xl p-3">
-          <div className="flex items-center gap-2 mb-2">
+      <div className="p-4 border-b border-hairline">
+        <div className="bg-white border border-hairline rounded-xl p-3">
+          <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-full gradient-brand flex items-center justify-center text-white text-xs font-bold shrink-0">
               {userName.charAt(0).toUpperCase()}
             </div>
             <div className="overflow-hidden">
-              <p className="text-sm font-semibold text-white truncate">{userName}</p>
-              <span className={clsx("text-[10px] px-2 py-0.5 rounded-full border font-medium", roleColor)}>
+              <p className="text-sm font-semibold text-ink truncate">{userName}</p>
+              <span className={clsx("text-[10px] px-2 py-0.5 rounded-full font-semibold", roleBadge)}>
                 {roleLabel}
               </span>
             </div>
@@ -105,7 +105,7 @@ export function Sidebar({ role, userName }: SidebarProps) {
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 p-4 space-y-1">
+      <nav className="flex-1 p-4 space-y-0.5">
         {navItems.map((item) => {
           const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
           return (
@@ -115,31 +115,31 @@ export function Sidebar({ role, userName }: SidebarProps) {
               className={clsx(
                 "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 group",
                 isActive
-                  ? "bg-upn-green-700/20 text-green-300 border border-upn-green-600/30"
-                  : "text-green-300/60 hover:text-green-200 hover:bg-white/5"
+                  ? "bg-white border border-hairline text-ink shadow-sm"
+                  : "text-ink-muted-48 hover:text-ink hover:bg-white/60"
               )}
             >
               <span
                 className={clsx(
                   "transition-colors",
-                  isActive ? "text-green-400" : "text-green-500/50 group-hover:text-green-400"
+                  isActive ? "text-upn-green-700" : "text-ink-muted-48 group-hover:text-upn-green-700"
                 )}
               >
                 {item.icon}
               </span>
               {item.label}
-              {isActive && <ChevronRight size={14} className="ml-auto text-green-500" />}
+              {isActive && <ChevronRight size={13} className="ml-auto text-ink-muted-48" />}
             </Link>
           );
         })}
       </nav>
 
       {/* Logout */}
-      <div className="p-4 border-t border-white/8">
+      <div className="p-4 border-t border-hairline">
         <button
           id="btn-logout"
           onClick={handleLogout}
-          className="flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sm font-medium text-red-400/70 hover:text-red-400 hover:bg-upn-red-900/20 transition-all duration-150"
+          className="flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sm font-medium text-upn-red-700 hover:bg-upn-red-100 transition-all duration-150"
         >
           <LogOut size={18} />
           Keluar

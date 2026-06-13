@@ -27,7 +27,7 @@ export default async function PesertaLayout({
   }
 
   return (
-    <div className="min-h-screen bg-dark-900 flex">
+    <div className="min-h-screen bg-white flex">
       <Sidebar role="peserta" userName={profile?.full_name || "Peserta"} />
       <main className="flex-1 p-8 overflow-auto">
         <div className="max-w-4xl mx-auto">{children}</div>

@@ -21,7 +21,7 @@ export default async function AdminLayout({
   if (profile?.role !== "admin") redirect("/login");
 
   return (
-    <div className="min-h-screen bg-dark-900 flex">
+    <div className="min-h-screen bg-white flex">
       <Sidebar role="admin" userName={profile?.full_name || "Admin"} />
       <main className="flex-1 p-8 overflow-auto">
         <div className="max-w-6xl mx-auto">{children}</div>

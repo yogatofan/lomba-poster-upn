@@ -27,7 +27,7 @@ export default async function JuriLayout({
   }
 
   return (
-    <div className="min-h-screen bg-dark-900 flex">
+    <div className="min-h-screen bg-white flex">
       <Sidebar role="juri" userName={profile?.full_name || "Juri"} />
       <main className="flex-1 p-8 overflow-auto">
         <div className="max-w-5xl mx-auto">{children}</div>

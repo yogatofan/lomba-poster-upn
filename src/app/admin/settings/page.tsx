@@ -76,33 +76,33 @@ export default function AdminSettingsPage() {
   return (
     <div className="space-y-6 animate-fade-in max-w-3xl">
       <div>
-        <h1 className="text-2xl font-black text-white flex items-center gap-2">
-          <SettingsIcon className="w-6 h-6 text-green-400" />
+        <h1 className="text-2xl font-black text-ink flex items-center gap-2">
+          <SettingsIcon className="w-6 h-6 text-upn-green-700" />
           Pengaturan Lomba
         </h1>
-        <p className="text-sm text-green-400/60 mt-1">
+        <p className="text-sm text-ink-muted-48 mt-1">
           Atur periode pendaftaran dan penilaian poster
         </p>
       </div>
 
       {error && (
-        <div className="glass-red rounded-xl p-3 flex items-start gap-2">
-          <AlertCircle size={14} className="text-red-400 shrink-0 mt-0.5" />
-          <p className="text-sm text-red-300">{error}</p>
+        <div className="glass-red rounded-xl p-3 flex items-start gap-2 border border-upn-red-700/20">
+          <AlertCircle size={14} className="text-upn-red-700 shrink-0 mt-0.5" />
+          <p className="text-sm text-upn-red-800 font-medium">{error}</p>
         </div>
       )}
       {success && (
-        <div className="glass-green rounded-xl p-3 flex items-start gap-2">
-          <CheckCircle2 size={14} className="text-green-400 shrink-0 mt-0.5" />
-          <p className="text-sm text-green-300">{success}</p>
+        <div className="glass-green rounded-xl p-3 flex items-start gap-2 border border-upn-green-600/20">
+          <CheckCircle2 size={14} className="text-upn-green-700 shrink-0 mt-0.5" />
+          <p className="text-sm text-upn-green-800 font-medium">{success}</p>
         </div>
       )}
 
-      <div className="glass rounded-2xl p-6 space-y-6">
-        <div className="flex items-start justify-between gap-4 p-4 rounded-xl border border-white/10 bg-white/5">
+      <div className="card space-y-6">
+        <div className="flex items-start justify-between gap-4 p-4 rounded-xl border border-hairline bg-canvas-parchment">
           <div>
-            <h3 className="text-base font-bold text-white mb-1">Periode Pendaftaran</h3>
-            <p className="text-xs text-green-400/60 mb-2">
+            <h3 className="text-base font-bold text-ink mb-1">Periode Pendaftaran</h3>
+            <p className="text-xs text-ink-muted-48 mb-2">
               Jika ditutup, peserta tidak dapat mendaftar atau mengupload karya baru.
             </p>
             {settings.pendaftaran_dibuka ? (
@@ -113,16 +113,16 @@ export default function AdminSettingsPage() {
           </div>
           <button
             onClick={() => setSettings(s => ({ ...s, pendaftaran_dibuka: !s.pendaftaran_dibuka }))}
-            className={`transition-colors duration-200 ${settings.pendaftaran_dibuka ? "text-green-400 hover:text-green-300" : "text-green-400/30 hover:text-green-400/50"}`}
+            className={`transition-colors duration-200 cursor-pointer ${settings.pendaftaran_dibuka ? "text-upn-green-700 hover:text-upn-green-800" : "text-zinc-300 hover:text-zinc-400"}`}
           >
             {settings.pendaftaran_dibuka ? <ToggleRight size={40} /> : <ToggleLeft size={40} />}
           </button>
         </div>
 
-        <div className="flex items-start justify-between gap-4 p-4 rounded-xl border border-white/10 bg-white/5">
+        <div className="flex items-start justify-between gap-4 p-4 rounded-xl border border-hairline bg-canvas-parchment">
           <div>
-            <h3 className="text-base font-bold text-white mb-1">Periode Penilaian</h3>
-            <p className="text-xs text-green-400/60 mb-2">
+            <h3 className="text-base font-bold text-ink mb-1">Periode Penilaian</h3>
+            <p className="text-xs text-ink-muted-48 mb-2">
               Buka akses bagi juri untuk mulai menilai karya peserta.
             </p>
             {settings.penilaian_dibuka ? (
@@ -133,13 +133,13 @@ export default function AdminSettingsPage() {
           </div>
           <button
             onClick={() => setSettings(s => ({ ...s, penilaian_dibuka: !s.penilaian_dibuka }))}
-            className={`transition-colors duration-200 ${settings.penilaian_dibuka ? "text-blue-400 hover:text-blue-300" : "text-green-400/30 hover:text-green-400/50"}`}
+            className={`transition-colors duration-200 cursor-pointer ${settings.penilaian_dibuka ? "text-blue-700 hover:text-blue-800" : "text-zinc-300 hover:text-zinc-400"}`}
           >
             {settings.penilaian_dibuka ? <ToggleRight size={40} /> : <ToggleLeft size={40} />}
           </button>
         </div>
 
-        <div className="pt-4 border-t border-white/10">
+        <div className="pt-4 border-t border-hairline">
           <Button onClick={handleSave} loading={saving} size="lg">
             Simpan Pengaturan
           </Button>
