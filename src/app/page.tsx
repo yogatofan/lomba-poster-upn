@@ -18,6 +18,8 @@ export const metadata: Metadata = {
     'Ikuti Lomba Poster Pencegahan Kekerasan Seksual Dies Natalis ke-67 UPN "Veteran" Jawa Timur. Target Rekor MURI.',
 };
 
+export const revalidate = 0;
+
 import { createClient, createServiceClient } from "@/lib/supabase/server";
 
 const subTema = [
