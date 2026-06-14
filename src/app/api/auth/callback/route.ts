@@ -8,6 +8,8 @@ export async function GET(request: Request) {
   if (code) {
     const supabase = await createClient();
     await supabase.auth.exchangeCodeForSession(code);
+    // Sign out immediately so they have to login manually as requested
+    await supabase.auth.signOut();
   }
 
   // URL to redirect to after sign in process completes
