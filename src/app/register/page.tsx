@@ -103,8 +103,8 @@ export default function RegisterPage() {
         <div className="bg-white border border-hairline rounded-3xl p-8 shadow-sm">
           {/* Logo */}
           <div className="flex flex-col items-center mb-8">
-            <div className="relative w-14 h-14 mb-4">
-              <Image src="/logo.png" alt="Logo" fill className="object-contain" />
+            <div className="w-14 h-14 mb-4">
+              <Image src="/logo.png" alt="Logo" width={56} height={56} className="w-auto h-full object-contain" />
             </div>
             <h1 className="text-2xl font-black text-ink">Daftar Akun</h1>
             <p className="text-sm text-ink-muted-48 mt-1">Lomba Poster</p>

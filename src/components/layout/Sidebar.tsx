@@ -77,8 +77,8 @@ export function Sidebar({ role, userName }: SidebarProps) {
       {/* Logo / Brand */}
       <div className="p-6 border-b border-hairline">
         <div className="flex items-center gap-3">
-          <div className="relative w-10 h-10 shrink-0">
-            <Image src="/logo.png" alt="Logo" fill className="object-contain" />
+          <div className="w-10 h-10 shrink-0">
+            <Image src="/logo.png" alt="Logo" width={40} height={40} className="w-auto h-full object-contain" />
           </div>
           <div>
             <p className="text-xs font-bold text-ink leading-tight">UPN "Veteran" Jawa Timur</p>

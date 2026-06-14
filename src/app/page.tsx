@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 import {
   Shield,
   Users,
@@ -37,12 +38,33 @@ const indikator = [
   { nama: "Pesan & Call to Action", bobot: "20%", desc: "Pesan jelas dan mengajak bertindak" },
 ];
 
+async function handleLogout() {
+  "use server";
+  const client = await createClient();
+  await client.auth.signOut();
+  redirect("/login");
+}
+
 export default async function HomePage() {
   const serviceClient = await createServiceClient();
   const { count } = await serviceClient
     .from("submissions")
     .select("*", { count: "exact", head: true })
     .eq("status", "submitted");
+
+  // Check if user is authenticated
+  const client = await createClient();
+  const { data: { user } } = await client.auth.getUser();
+
+  let userProfile: { role: string; full_name: string } | null = null;
+  if (user) {
+    const { data } = await serviceClient
+      .from("profiles")
+      .select("role, full_name")
+      .eq("id", user.id)
+      .single();
+    userProfile = data;
+  }
 
   const stats = [
     { icon: <Users className="w-5 h-5" />, value: "300+", label: "Target Peserta" },
@@ -58,8 +80,8 @@ export default async function HomePage() {
       <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-hairline">
         <div className="max-w-6xl mx-auto px-6 py-3.5 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="relative w-10 h-10 shrink-0">
-              <Image src="/logo.png" alt="Logo" fill className="object-contain" />
+            <div className="w-10 h-10 shrink-0">
+              <Image src="/logo.png" alt="Logo" width={40} height={40} className="w-auto h-full object-contain" />
             </div>
             <div>
               <p className="text-sm font-bold text-ink leading-tight">UPN "Veteran" Jawa Timur</p>
@@ -67,19 +89,40 @@ export default async function HomePage() {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <Link
-              href="/login"
-              className="text-sm text-ink-muted-48 hover:text-ink font-medium transition-colors px-4 py-2 rounded-full hover:bg-canvas-parchment"
-            >
-              Masuk
-            </Link>
-            <Link
-              href="/register"
-              id="btn-daftar-nav"
-              className="btn-primary text-sm px-5 py-2"
-            >
-              Daftar
-            </Link>
+            {userProfile ? (
+              <>
+                <Link
+                  href={`/${userProfile.role}/dashboard`}
+                  className="text-sm text-ink-muted-48 hover:text-ink font-medium transition-colors px-4 py-2 rounded-full hover:bg-canvas-parchment"
+                >
+                  Dashboard
+                </Link>
+                <form action={handleLogout}>
+                  <button
+                    type="submit"
+                    className="btn-primary text-sm px-5 py-2"
+                  >
+                    Keluar
+                  </button>
+                </form>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className="text-sm text-ink-muted-48 hover:text-ink font-medium transition-colors px-4 py-2 rounded-full hover:bg-canvas-parchment"
+                >
+                  Masuk
+                </Link>
+                <Link
+                  href="/register"
+                  id="btn-daftar-nav"
+                  className="btn-primary text-sm px-5 py-2"
+                >
+                  Daftar
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </nav>
@@ -151,6 +194,29 @@ export default async function HomePage() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Flyer Section — white spotlight ── */}
+      <section className="py-20">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-black text-ink mb-3">Informasi Lengkap Lomba</h2>
+            <p className="text-ink-muted-48">Ketentuan, kriteria, dan panduan lengkap lomba poster</p>
+          </div>
+
+          <div className="flex justify-center">
+            <div className="bg-white border border-hairline rounded-3xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200">
+              <Image
+                src="/flyer.jpeg"
+                alt="Flyer Lomba Poster Digital - Aturan dan Ketentuan Lengkap"
+                width={1240}
+                height={1754}
+                className="w-full h-auto max-w-3xl mx-auto rounded-xl"
+                priority
+              />
+            </div>
           </div>
         </div>
       </section>
