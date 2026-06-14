@@ -65,7 +65,7 @@ export default function RegisterPage() {
         return;
       }
 
-      router.push("/peserta/dashboard");
+      router.push("/login?message=registered");
       router.refresh();
     } finally {
       setLoading(false);
