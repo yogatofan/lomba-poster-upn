@@ -15,7 +15,12 @@ const SUB_TEMA_SHORT: Record<string, string> = {
   "Teman Peduli, Kampus Terlindungi": "Teman Peduli",
 };
 
-export default async function JuriDashboard() {
+export default async function JuriDashboard({
+  searchParams,
+}: {
+  searchParams: Promise<{ message?: string }>;
+}) {
+  const { message } = await searchParams;
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
@@ -56,6 +61,19 @@ export default async function JuriDashboard() {
           Dies Natalis ke-67 UPN "Veteran" Jawa Timur
         </p>
       </div>
+
+      {/* Welcome Message after Email Confirmation */}
+      {message === "confirmed" && (
+        <div className="bg-upn-green-100 border border-upn-green-400/40 rounded-[18px] p-4 flex items-start gap-3 animate-fade-in shadow-sm">
+          <CheckCircle2 size={20} className="text-upn-green-700 shrink-0 mt-0.5" />
+          <div>
+            <p className="text-sm font-bold text-upn-green-800 tracking-tight uppercase">Email Berhasil Dikonfirmasi!</p>
+            <p className="text-xs text-upn-green-700 font-medium mt-0.5">
+              Selamat datang, Juri. Akun Anda telah aktif dan siap untuk memulai penilaian karya peserta.
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* Progress Stats */}
       <div className="grid grid-cols-3 gap-4">

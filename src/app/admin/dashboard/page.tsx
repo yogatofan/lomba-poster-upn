@@ -10,6 +10,7 @@ import {
   ToggleRight,
   BarChart3,
   Clock,
+  CheckCircle2,
 } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -24,7 +25,12 @@ const SUB_TEMA_SHORT: Record<string, string> = {
   "Teman Peduli, Kampus Terlindungi": "Teman Peduli",
 };
 
-export default async function AdminDashboard() {
+export default async function AdminDashboard({
+  searchParams,
+}: {
+  searchParams: Promise<{ message?: string }>;
+}) {
+  const { message } = await searchParams;
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
@@ -101,6 +107,19 @@ export default async function AdminDashboard() {
           )}
         </div>
       </div>
+
+      {/* Welcome Message after Email Confirmation */}
+      {message === "confirmed" && (
+        <div className="bg-upn-green-100 border border-upn-green-400/40 rounded-[18px] p-4 flex items-start gap-3 animate-fade-in shadow-sm">
+          <CheckCircle2 className="w-5 h-5 text-upn-green-700 shrink-0 mt-0.5" />
+          <div>
+            <p className="text-sm font-bold text-upn-green-800 tracking-tight uppercase">Email Berhasil Dikonfirmasi!</p>
+            <p className="text-xs text-upn-green-700 font-medium mt-0.5">
+              Selamat datang kembali, Admin. Email Anda telah berhasil diverifikasi.
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* Stat Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">

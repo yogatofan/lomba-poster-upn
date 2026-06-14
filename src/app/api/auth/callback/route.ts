@@ -7,11 +7,20 @@ export async function GET(request: Request) {
 
   if (code) {
     const supabase = await createClient();
-    await supabase.auth.exchangeCodeForSession(code);
-    // Sign out immediately so they have to login manually as requested
-    await supabase.auth.signOut();
+    const { data: { user } } = await supabase.auth.exchangeCodeForSession(code);
+    
+    if (user) {
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("role")
+        .eq("id", user.id)
+        .single();
+      
+      const role = profile?.role || "peserta";
+      return NextResponse.redirect(`${requestUrl.origin}/${role}/dashboard?message=confirmed`);
+    }
   }
 
-  // URL to redirect to after sign in process completes
-  return NextResponse.redirect(`${requestUrl.origin}/login?message=confirmed`);
+  // Fallback to login if something goes wrong
+  return NextResponse.redirect(`${requestUrl.origin}/login`);
 }

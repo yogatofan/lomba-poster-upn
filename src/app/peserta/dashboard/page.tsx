@@ -18,7 +18,12 @@ export const metadata: Metadata = {
   title: "Dashboard",
 };
 
-export default async function PesertaDashboard() {
+export default async function PesertaDashboard({
+  searchParams,
+}: {
+  searchParams: Promise<{ message?: string }>;
+}) {
+  const { message } = await searchParams;
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
@@ -91,6 +96,19 @@ export default async function PesertaDashboard() {
           Lomba Poster Dies Natalis ke-67 UPN &ldquo;Veteran&rdquo; Jawa Timur
         </p>
       </div>
+
+      {/* Welcome Message after Email Confirmation */}
+      {message === "confirmed" && (
+        <div className="bg-upn-green-100 border border-upn-green-400/40 rounded-[18px] p-4 flex items-start gap-3 animate-fade-in shadow-sm">
+          <CheckCircle2 className="w-5 h-5 text-upn-green-700 shrink-0 mt-0.5" />
+          <div>
+            <p className="text-sm font-bold text-upn-green-800 tracking-tight uppercase">Email Berhasil Dikonfirmasi!</p>
+            <p className="text-xs text-upn-green-700 font-medium mt-0.5">
+              Selamat, akun Anda telah aktif. Silakan lengkapi data diri dan unggah poster terbaik Anda.
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* Status Pendaftaran */}
       {!pendaftaranDibuka && (
